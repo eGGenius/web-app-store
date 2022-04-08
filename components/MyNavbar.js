@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Link from 'next/link';
+import {FaUser} from 'react-icons/fa';
+import {IconContext} from "react-icons";
 
 export default function MyNavbar() {
     return (
@@ -16,6 +18,13 @@ export default function MyNavbar() {
                         <Nav.Link href="/newapp">NewApp</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
+                <Navbar.Collapse className="justify-content-end">
+      <Navbar.Text>
+      <IconContext.Provider value={{color: 'white',size: '26px'}}>
+                            <FaUser/>
+                        </IconContext.Provider>
+      </Navbar.Text>
+    </Navbar.Collapse>
             </Container>
         </Navbar>
     );
