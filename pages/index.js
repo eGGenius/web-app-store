@@ -4,13 +4,8 @@ import {Row} from "react-bootstrap";
 import {Col} from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import StoreFilter from "../components/StoreFilter";
-import useSWR from 'swr';
-import content from './api/templates.json';
 
-const fetcher = (url) => fetch(url).then((res) => res.json())
-
-export default function Home() {
-    const data = content;
+export default function Home({ data }) {
 
     return (
         <Container style={{
@@ -25,17 +20,17 @@ export default function Home() {
                     </Card>
                 </Col>
                 <Col sm={9}>
-                    <Card border="dark" href="http://localhost:3000/test">
+                    <Card border="dark">
                         <Card.Body>
                             < Row xs={1} md={4} className="g-2">
-                                {data.templates.map((container) => (
-                                        <Col  key={container.Title + container.description + container.type}>
+                                {data.map((container) => (
+                                        <Col  key={container.title + container.description + container.type}>
                                             <Card>
                                                 <Card.Img variant="bottom" src={container.logo} fluid="true"/>
                                                 <Card.Body>
                                                     <Card.Title>{container.title}</Card.Title>
                                                     <Card.Text>{container.description}</Card.Text>
-                                                    <Button href={'http://localhost:3000/' + container.title}>Install</Button>
+                                                    <Button href={container.title}>Install</Button>
                                                 </Card.Body>
                                             </Card>
                                         </Col>
@@ -48,3 +43,13 @@ export default function Home() {
         </Container>
     );
 }
+
+export async function getServerSideProps() {
+    // Fetch data from external API
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/templates`
+    const res = await fetch(url)
+    const data = await res.json()
+  
+    // Pass data to the page via props
+    return { props: { data } }
+  }

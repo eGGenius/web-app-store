@@ -9,33 +9,8 @@ import {FaPlay} from 'react-icons/fa';
 import {FaTrash} from 'react-icons/fa';
 import {FaPause} from 'react-icons/fa';
 import {IconContext} from "react-icons";
-import useSWR from 'swr'
-
-const protocol = 'http://'
-const host = '192.168.178.28:9000';
-const url = protocol + host + '/api/endpoints';
-const url1 = 'https://pokeapi.co/api/v2/pokemon';
-const bearer = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGUiOjEsImV4cCI6MTY1MDY0OTIxOH0.c5uyrn5CyarmS9fd1P5jYclEvGMQvAKZQZZQPpeX5hk';
-
-const fetcher = (url, options) => fetch(url, options)//.then(response => response.json())
 
 export default function MyAppsPage(props) {
-    const options = {
-        method: 'GET',
-        mode: 'no-cors', // no-cors, *cors, same-origin
-        credentials: 'include',
-        headers: {
-            'Authorization': 'Bearer ' + bearer,
-        }
-    };
-    
-    const {data, error} = useSWR([url, options], fetcher);
-
-    if (error) {
-        console.log('ERROR: ' + error)
-        return (<p>{error.message}</p>)}
-    if (!data) {
-        console.log('DATA: ' + {data})
         return ( <> <Container style={{
         padding: '1rem'
     }}>
@@ -66,7 +41,7 @@ export default function MyAppsPage(props) {
                                 .map((container) => (
                                     <tr key={container.Names}>
                                         <td><Image src="Wordpress.png" height={50}/></td>
-                                        <td>{container.Names}</td>
+                                        <td>{container.Names[0].slice(1)}</td>
                                         <td>{container.Image}</td>
                                         <td>{container.State}</td>
                                         <td>
@@ -106,18 +81,19 @@ export default function MyAppsPage(props) {
     </Container> </>
     )
 }
-}
 
-const uri = "https://212.227.208.220:9443/api/endpoints/2/docker/containers/json?all=true";
- export async function getServerSideProps() {
-            // Default options are marked with *
-            const res = await fetch(uri, {
-                headers: {
-                    "x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="
-                }
-            })
-            const containers = await res.json()
-            return {props: {
-                    containers
-                }}
+const uri = "https://webapp-store.de:9443/api/endpoints/2/docker/containers/json?all=true";
+export async function getServerSideProps() {
+    // Default options are marked with *
+    const res = await fetch(uri, {
+        headers: {
+            "x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="
         }
+    })
+    const containers = await res.json()
+    return {
+        props: {
+            containers
+        }
+    }
+}
