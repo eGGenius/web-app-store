@@ -108,12 +108,12 @@ export default function MyAppsPage(props) {
 }
 }
 
-const uri = "https://localhost:9443/api/endpoints/2/docker/containers/json?all=true";
+const uri = "https://212.227.208.220:9443/api/endpoints/2/docker/containers/json?all=true";
  export async function getServerSideProps() {
             // Default options are marked with *
             const res = await fetch(uri, {
                 headers: {
-                    "x-api-key": "ptr_HyM+KJc0//mIhm95HpTxHOTGXGL55wcd0Tp8xe87Kl4="
+                    "x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="
                 }
             })
             const containers = await res.json()

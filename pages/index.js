@@ -2,9 +2,16 @@ import {Card} from "react-bootstrap";
 import {Container} from "react-bootstrap";
 import {Row} from "react-bootstrap";
 import {Col} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import StoreFilter from "../components/StoreFilter";
+import useSWR from 'swr';
 
-export default function Home(props) {
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
+export default function Home() {
+    const { data, error } = useSWR('/api/templates', fetcher)
+    if (error) return <div>Failed to load users</div>
+    if (!data) return <div>Loading...</div>
     return (
         <Container style={{
             padding: '1rem'
@@ -18,20 +25,18 @@ export default function Home(props) {
                     </Card>
                 </Col>
                 <Col sm={9}>
-                    <Card border="dark">
+                    <Card border="dark" href="http://localhost:3000/test">
                         <Card.Body>
                             < Row xs={1} md={4} className="g-2">
-                                {props
-                                    .containers
-                                    .templates
-                                    .map((container) => (
-                                        <Col  key={container.title + container.description + container.type}>
+                                {data.map((container) => (
+                                        <Col  key={container.Title + container.description + container.type}>
                                             <Card>
-                                                <Card.Img variant="bottom" src={container.logo} fluid="true"/>
+                                                <Card.Img variant="bottom" src={container.Logo} fluid="true"/>
                                                 <Card.Body>
-                                                    <Card.Title>{container.title}</Card.Title>
-                                                    <Card.Text>{container.description}</Card.Text>
+                                                    <Card.Title>{container.Title}</Card.Title>
+                                                    <Card.Text>{container.Description}</Card.Text>
                                                     <Card.Link href="/wordpress">{container.ports}</Card.Link>
+                                                    <Button href={'http://localhost:3000/' + container.Title}>Install</Button>
                                                 </Card.Body>
                                             </Card>
                                         </Col>
@@ -43,18 +48,4 @@ export default function Home(props) {
             </Row>
         </Container>
     );
-}
-
-const url = "http://localhost:3000/api/templates ";
-export async function getStaticProps() {
-    // Default options are marked with *
-    const res = await fetch(url, {
-        headers: {
-            "x-api-key": "ptr_HyM+KJc0//mIhm95HpTxHOTGXGL55wcd0Tp8xe87Kl4="
-        }
-    })
-    const containers = await res.json()
-    return {props: {
-            containers
-        }}
 }

@@ -1,17 +1,15 @@
-import content from '/templates.json';
-
 export default async function handler(req, res) {
-    console.log(content)
-    let templates = await getTemplates(req.headers.key)
+    let templates = await getTemplates(req.headers.key, '1')
 //     templates.templates.unshift({title: 'test', description: 'this is a test', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Test.svg'})
-//    console.log(templates)
+    console.log(templates)
     res
         .status(200)
         .json(templates)
 }
-const url = "https://212.227.208.220:9443/api/custom_templates ";
-export async function getTemplates(key) {
-    const res = await fetch(url, {
+const url = "https://212.227.208.220:9443/api/custom_templates";
+export async function getTemplates(key, id) {
+    const uri = "https://212.227.208.220:9443/api/custom_templates/1"
+    const res = await fetch(uri, {
         method: 'GET',
         withCredentials: true,
         headers: {
