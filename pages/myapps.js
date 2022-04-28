@@ -37,13 +37,13 @@ export default function MyAppsPage(props) {
                         </thead>
                         <tbody>
                             {props
-                                .containers
-                                .map((container) => (
-                                    <tr key={container.Names}>
+                                .myapps
+                                .map((myapp) => (
+                                    <tr key={myapp.Names}>
                                         <td><Image src="Wordpress.png" height={50}/></td>
-                                        <td>{container.Names[0].slice(1)}</td>
-                                        <td>{container.Image}</td>
-                                        <td>{container.State}</td>
+                                        <td>{myapp.Names[0].slice(1)}</td>
+                                        <td>{myapp.Image}</td>
+                                        <td>{myapp.State}</td>
                                         <td>
                                             <IconContext.Provider
                                                 value={{
@@ -82,18 +82,18 @@ export default function MyAppsPage(props) {
     )
 }
 
-const uri = "https://webapp-store.de:9443/api/endpoints/2/docker/containers/json?all=true";
+
 export async function getServerSideProps() {
-    // Default options are marked with *
-    const res = await fetch(uri, {
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/myapps`
+    const res = await fetch(url, {
         headers: {
             "x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="
         }
     })
-    const containers = await res.json()
+    const myapps = await res.json()
     return {
         props: {
-            containers
+            myapps
         }
     }
 }

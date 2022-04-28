@@ -1,11 +1,11 @@
 export default async function handler(req, res) {
-    let templates = await getTemplates(req.headers.key, '1')
+    let myapps = await getMyApps()
     res
         .status(200)
-        .json(templates)
+        .json(myapps)
 }
-export async function getTemplates() {
-    const url = process.env.PORTAINER_API + "templates";
+export async function getMyApps() {
+    const url = process.env.PORTAINER_API + "endpoints/2/docker/containers/json?all=true";
     const res = await fetch(url, {
         method: 'GET',
         withCredentials: true,
@@ -13,6 +13,7 @@ export async function getTemplates() {
             "x-api-key": process.env.PORTAINER_ADMIN_KEY
         }
     })
-    const templates = await res.json()
-    return templates.templates
+    const myapps = await res.json()
+    return myapps
 }
+
