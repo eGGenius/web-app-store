@@ -1,3 +1,4 @@
+import React from "react"
 import {Container} from "react-bootstrap"
 import {Card} from "react-bootstrap"
 import {Form} from "react-bootstrap"
@@ -8,7 +9,6 @@ import toast from 'react-hot-toast';
 import {useRouter} from 'next/router';
 
 export default function StoreDetailViewPage(props) {
-
     const data = props.data
     return (
         <Container style={{
@@ -19,34 +19,23 @@ export default function StoreDetailViewPage(props) {
                     <Image src={data.logo} height={120}/>
                     <h1>{data.title}</h1>
                     < p >{data.description}</p>
-                    <CreateContainer/>
+                    <CreateContainer template={data}/>
                 </Card.Body>
             </Card>
         </Container>
     )
 }
 
-function CreateContainer() {
+export function CreateContainer(template) {
+    const data = template
+    console.log(data)
     const router = useRouter();
-    const [name,
-        setName] = useState('');
+    const [name, setName] = useState('');
     const createContainer = async(e) => {
         e.preventDefault();
         const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/create/' + name;
         const content = {
-            "image": "nginx:latest",
-            "ExposedPorts": {
-                "80/tcp": {}
-            },
-            "HostConfig": {
-                "PortBindings": {
-                    "80/tcp": [
-                        {
-                            "HostPort": "8080"
-                        }
-                    ]
-                }
-            }
+            "image": data.template.image
         }
         const res = await fetch(url, {
             method: 'POST',

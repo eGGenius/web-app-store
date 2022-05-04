@@ -1,14 +1,14 @@
 export default async function handler(req, res) {
-    let container  = await createContainer(req.query.name)
+    let container  = await createContainer(req.query.name, req.body)
     res
         .status(200)
         .json(container)
 }
 
-export async function createContainer(name) {
+export async function createContainer(name, details) {
     const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name;
-    const content = {"image": "nginx:latest","ExposedPorts": {"80/tcp": { }},"HostConfig":{ "PortBindings": { "80/tcp": [{ "HostPort": "8080" }] } }}
-    console.log(name)
+    const detail = JSON.parse(details)
+    const content = {"image": detail.image,"HostConfig":{ "PublishAllPorts": true }}
     const res = await fetch(url, {
         method: 'POST',
         withCredentials: true,

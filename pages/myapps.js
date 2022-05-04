@@ -45,31 +45,13 @@ export default function MyAppsPage(props) {
                                         <td>{myapp.Image}</td>
                                         <td>{myapp.State}</td>
                                         <td>
-                                            <IconContext.Provider
-                                                value={{
-                                                color: 'green',
-                                                size: '20px'
-                                            }}>
-                                                <FaPlay/>
-                                            </IconContext.Provider>
+                                            <Button variant="success" onClick={() => startContainer(myapp.Id)}>Start</Button>
                                         </td>
                                         <td>
-                                            <IconContext.Provider
-                                                value={{
-                                                color: 'orange',
-                                                size: '20px'
-                                            }}>
-                                                <FaPause/>
-                                            </IconContext.Provider>
+                                            <Button variant="warning" onClick={() => stopContainer(myapp.Id)}>Stop</Button>
                                         </td>
                                         <td>
-                                            <IconContext.Provider
-                                                value={{
-                                                color: 'red',
-                                                size: '20px'
-                                            }}>
-                                                <FaTrash/>
-                                            </IconContext.Provider>
+                                            <Button variant="danger" onClick={() => deleteContainer(myapp.Id)}>Delete</Button>
                                         </td>
                                     </tr>
                                 ))}
@@ -96,4 +78,31 @@ export async function getServerSideProps() {
             myapps
         }
     }
+}
+
+async function startContainer(container_id) {
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/' + container_id + '/start';
+    const res = await fetch(url, {
+        method: 'POST',
+        body: 'start Container'
+    })
+    console.log(res)
+}
+
+async function stopContainer(container_id) {
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/' + container_id + '/stop';
+    const res = await fetch(url, {
+        method: 'POST',
+        body: 'stop Container'
+    })
+    console.log(res)
+}
+
+async function deleteContainer(container_id) {
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/' + container_id;
+    const res = await fetch(url, {
+        method: 'DELETE',
+        body: 'delete Container'
+    })
+    console.log(res)
 }
