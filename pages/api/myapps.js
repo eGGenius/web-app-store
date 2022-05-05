@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-    let myapps = await getMyApps()
+    const myapps = await getMyApps()
     res
         .status(200)
         .json(myapps)
@@ -10,7 +10,7 @@ export async function getMyApps() {
         method: 'GET',
         withCredentials: true,
         headers: {
-            "x-api-key": process.env.PORTAINER_ADMIN_KEY
+            "x-api-key": process.env.PORTAINER_KEY
         }
     })
     const myapps = await res.json()

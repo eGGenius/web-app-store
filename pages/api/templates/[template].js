@@ -11,7 +11,7 @@ export async function getTemplates(TemplateTitle) {
         method: 'GET',
         withCredentials: true,
         headers: {
-            "x-api-key": process.env.PORTAINER_ADMIN_KEY
+            "x-api-key": process.env.PORTAINER_KEY
         }
     })
     const templates = await res.json()
