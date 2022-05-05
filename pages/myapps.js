@@ -1,70 +1,68 @@
-import React from "react";
-import {Card} from "react-bootstrap";
-import {Container} from "react-bootstrap";
-import {Image, Table} from "react-bootstrap"
-import {Form} from "react-bootstrap"
-import {Button} from "react-bootstrap"
-import {FormControl} from "react-bootstrap"
+import React, { useRef } from 'react';
 import useSWR from 'swr'
-import toast from 'react-hot-toast';
-import Link from 'next/link'
 
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
+import { Toast } from 'primereact/toast';
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MyAppsPage() {
     const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/myapps`
-    const header = {headers: {"x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="}}
-    const { data, error } = useSWR([url, header], fetcher, { refreshInterval: 2000 })
-    console.log(data)
+    const headerData = {headers: {"x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="}}
+    const { data, error } = useSWR([url, headerData], fetcher, { refreshInterval: 2000 })
+
+    const toast = useRef(null);
+    const showError = () => {
+        toast.current.show({severity:'error', summary: 'Deleted', detail:'Web App was deleted', life: 3000});
+    }
+
+    const actionBodyTemplate = (rowData) => {
+        return (
+            <React.Fragment>
+                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteContainer(rowData).then(showError())} />
+            </React.Fragment>
+        );
+    }
+    const linkBodyTemplate = (rowData) => {
+        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank">http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
+    }
+    const nameBodyTemplate = (rowData) => {
+        return `${rowData.Names[0].slice(1)}`;
+    }
+    const createdBodyTemplate = (rowData) => {
+        const date = new Date(rowData.Created*1000);
+        return Intl.DateTimeFormat('de', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(date)
+    }
 
     if (error) return <div>Failed to load</div>
     if (!data) return <div>Loading...</div>
-  
-    return ( <> <Container style={{padding: '1rem'}}>
-        <Card border="dark">
-            <Card.Body>
-                <Form className="d-flex">
-                    <FormControl
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"/>
-                    <Button variant="outline-success">Search</Button>
-                </Form>
-                < br/>
-                <div>
-                    <Table responsive>
-                        <thead>
-                            <tr>
-                                <th>Link</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data
-                                .map((myapp) => (
-                                    <tr key={myapp.Names}>
-                                        <td>
-                                            <Button variant="primary" href={`http://${myapp.Names[0].slice(1)}.webapp-store.de`} target="_blank">Open</Button>
-                                        </td>
-                                        <td>{myapp.Names[0].slice(1)}</td>
-                                        <td>{myapp.Image}</td>
-                                        <td>
-                                            <Button variant="danger" onClick={() => deleteContainer(myapp)}>Delete</Button>
-                                        </td>
-                                    </tr>
-                                ))}
-                        </tbody>
-                    </Table>
-                </div>
-            </Card.Body>
-        </Card>
-    </Container> </>
+    const renderHeader = () => {
+        return (
+            <div className="flex justify-content-between align-items-center">
+                <h5 className="m-0">My WebApps</h5>
+            </div>
+        )
+    }
+    const header = renderHeader();
+    return (
+        <div className=" p-4">
+            <Toast ref={toast} />
+            <Card>
+                <DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
+                    <Column field="Link" header="Link" body={linkBodyTemplate} sortable></Column>
+                    <Column field="Name" header="Name" body={nameBodyTemplate} sortable></Column>
+                    <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
+                    <Column body={actionBodyTemplate} ></Column>
+                </DataTable>
+            </Card>
+        </div>
     )
 }
+
 async function deleteContainer(container) {
     const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/' + container.Id;
     const res = await fetch(url, {
@@ -72,5 +70,4 @@ async function deleteContainer(container) {
         body: 'delete Container'
     })
     console.log(res)
-    toast.error(container.Names[0].slice(1) + ' deleted!')
 }

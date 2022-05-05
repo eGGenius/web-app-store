@@ -8,6 +8,7 @@ import StoreFilter from "../components/StoreFilter";
 export default function Home({ data }) {
 
     return (
+    <div className="App">
         <Container style={{
             padding: '1rem'
         }}>
@@ -41,6 +42,7 @@ export default function Home({ data }) {
                 </Col>
             </Row>
         </Container>
+    </div>
     );
 }
 
