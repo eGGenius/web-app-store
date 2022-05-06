@@ -1,18 +1,15 @@
-import {Card} from "react-bootstrap";
 import {Container} from "react-bootstrap";
+import { Card } from "primereact/card"
 
 import CreateAppForm from "../components/CreateAppForm"
 
 export default function NewAppPage({ }) {
     return (
-        <Container style={{
-            padding: '1rem'
-        }}>
-            <Card border="dark">
-                <Card.Body>
-                    <CreateAppForm/>
-                </Card.Body>
+        
+        <div className="p-4">
+            <Card>
+                <CreateAppForm/>
             </Card>
-        </Container>
+        </div>
     )
 }

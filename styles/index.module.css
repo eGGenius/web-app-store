@@ -1,0 +1,24 @@
+.productname {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.productdescription {
+    margin: 0 0 1rem 0;
+}
+
+.productgriditem {
+    border-radius: 10px;
+    margin: .5em;
+    border: 1px solid var(--surface-border);
+    padding: 2rem;
+}
+
+.productgriditem img {
+    width: 75%;
+    margin: 1rem 0;
+}
+
+.dataviewdemo {
+    text-align: center;
+}

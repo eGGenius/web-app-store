@@ -1,48 +1,37 @@
-import {Card} from "react-bootstrap";
-import {Container} from "react-bootstrap";
-import {Row} from "react-bootstrap";
-import {Col} from "react-bootstrap";
-import { Button } from "react-bootstrap";
-import StoreFilter from "../components/StoreFilter";
+import { DataView } from 'primereact/dataview';
+import { Dropdown } from 'primereact/dropdown';
+import { Button } from 'primereact/button';
+import styles from "../styles/index.module.css";
+import Link from 'next/link';
+import { Card } from 'primereact/card'
+
 
 export default function Home({ data }) {
+    const renderGridItem = (data) => {
+        return (
+            <div className="col-12 md:col-4" style={{height: '30rem', width: '20rem'}}>
+                <div className={styles.productgriditem}>
+                    <div className={styles.productgriditemcontent}>
+                    <img src={data.logo || 'images.png'}/>
+                        <div className={styles.productname}>{data.title}</div>
+                        <div className={styles.productdescription}>{data.description}</div>   
+                        <Link href={data.title}>
+                            <Button icon="pi pi-plus-circle" label="Install" ></Button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
-    <div className="App">
-        <Container style={{
-            padding: '1rem'
-        }}>
-            <Row>
-                <Col sm={3}>
-                    <Card border="dark">
-                        <Card.Body>
-                            <StoreFilter/>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col sm={9}>
-                    <Card border="dark">
-                        <Card.Body>
-                            < Row xs={1} md={4} className="g-2">
-                                {data.map((container) => (
-                                        <Col  key={container.title + container.description + container.type}>
-                                            <Card>
-                                                <Card.Img variant="bottom" src={container.logo} fluid="true"/>
-                                                <Card.Body>
-                                                    <Card.Title>{container.title}</Card.Title>
-                                                    <Card.Text>{container.description}</Card.Text>
-                                                    <Button href={container.title}>Install</Button>
-                                                </Card.Body>
-                                            </Card>
-                                        </Col>
-                                    ))}
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-    </div>
+        <div className="p-4">
+            <div className={styles.dataviewdemo}>
+                <Card>
+                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={45} />
+                </Card>
+            </div>
+        </div>
     );
 }
 

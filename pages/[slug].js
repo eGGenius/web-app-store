@@ -1,66 +1,60 @@
-import React from "react"
-import {Container} from "react-bootstrap"
-import {Card} from "react-bootstrap"
-import {Form} from "react-bootstrap"
-import {Button} from "react-bootstrap"
-import {Image} from "react-bootstrap"
-import {useState} from 'react';
-import toast from 'react-hot-toast';
-import {useRouter} from 'next/router';
+import React from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { InputText } from 'primereact/inputtext';
+import { Card } from "primereact/card";
+import { Button } from "primereact/button";
 
 export default function StoreDetailViewPage(props) {
     const data = props.data
-    return (
-        <Container style={{
-            padding: '1rem'
-        }}>
-            <Card border="dark">
-                <Card.Body>
-                    <Image src={data.logo} height={120}/>
-                    <h1>{data.title}</h1>
-                    < p >{data.description}</p>
-                    <CreateContainer template={data}/>
-                </Card.Body>
-            </Card>
-        </Container>
-    )
-}
-
-export function CreateContainer(template) {
-    const data = template
-    console.log(data)
     const router = useRouter();
     const [name, setName] = useState('');
-    const createContainer = async(e) => {
-        e.preventDefault();
+    const createContainer = async (e) => {
+        e.preventDefault()
         const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/create/' + name;
         const content = {
-            "image": data.template.image
+            "image": data.image
         }
         const res = await fetch(url, {
             method: 'POST',
             body: JSON.stringify(content)
         })
         console.log(res)
-        toast.success('Container created!')
         router.push('/myapps');
     }
-    return (
-        <Form onSubmit={createContainer}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>WebApp Name</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Name"/>
-                <Form.Text className="text-muted">
-                    Enter the name for your app
-                </Form.Text>
-            </Form.Group>
 
-            <Button type="submit">INSTALL</Button>
-        </Form>
+    const header =
+        <img alt="Card" src={data.logo} style={{ width: '10rem', margin: '1rem' }} />;
+
+    return (
+        <div className="p-4" style={{ 'text-align': 'center' }}>
+            <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }} >
+                <form onSubmit={createContainer}>
+                    <br></br>
+                    <div className="p-fluid grid">
+                        <div class="col"></div>
+                        <div className="col-6">
+                            <span className="p-float-label">
+                                <InputText id="in" type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)} />
+                                <label>Name</label>
+                            </span>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div className="p-fluid grid">
+                        <div class="col"></div>
+                        <div className="col-6">
+                            <div className="field col">
+                                <Button label="Install" className="w-full" type="submit"/>
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </form>
+            </Card>
+        </div>
     )
 }
 
@@ -70,7 +64,9 @@ export async function getServerSideProps(context) {
     const data = await res.json()
 
     // Pass data to the page via props
-    return {props: {
+    return {
+        props: {
             data
-        }}
+        }
+    }
 }
