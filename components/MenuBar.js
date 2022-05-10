@@ -33,7 +33,7 @@ export default function MenuBar() {
         <div className="p-4">
         <div >
             <Card>
-                <Menubar model={items} start={start} end={end} style={{'border-radius': '10px'}}/>
+                <Menubar model={items} start={start} end={end}/>
             </Card>
         </div>
         </div>

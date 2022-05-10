@@ -10,6 +10,7 @@ export async function getMyApps() {
         method: 'GET',
         withCredentials: true,
         headers: {
+            "Access-Control-Allow-Origin": "*",
             "x-api-key": process.env.PORTAINER_KEY
         }
     })

@@ -20,5 +20,9 @@
 }
 
 .dataviewdemo {
+    justify-content: space-around;
     text-align: center;
+}
+.productgriditem {
+    justify-content: space-around;
 }
