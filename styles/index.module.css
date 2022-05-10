@@ -11,18 +11,21 @@
     border-radius: 10px;
     margin: .5em;
     border: 1px solid var(--surface-border);
-    padding: 2rem;
+    padding: 1rem;
 }
 
-.productgriditem img {
-    width: 75%;
-    margin: 1rem 0;
-}
-
-.dataviewdemo {
-    justify-content: space-around;
+.dataview {
     text-align: center;
 }
-.productgriditem {
-    justify-content: space-around;
+
+.overview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -0.5rem;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+}
+
+#__next > div:nth-child(2) > div > div > div > div > div > div.p-dataview-content > div {
+    display: none;
 }

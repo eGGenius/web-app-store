@@ -1,34 +1,43 @@
 import { DataView } from 'primereact/dataview';
-import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
 import styles from "../styles/index.module.css";
 import Link from 'next/link';
-import { Card } from 'primereact/card'
+import { Card } from 'primereact/card';
+import { Dropdown } from 'primereact/dropdown';
 
 
 export default function Home({ data }) {
     const renderGridItem = (data) => {
         return (
-            <div className="col-12 md:col-4" style={{height: '30rem', width: '20rem'}}>
-                <div className={styles.productgriditem}>
-                    <div className={styles.productgriditemcontent}>
-                    <img src={data.logo || 'images.png'}/>
-                        <div className={styles.productname}>{data.title}</div>
-                        <div className={styles.productdescription}>{data.description}</div>   
-                        <Link href={data.title}>
-                            <Button icon="pi pi-plus-circle" label="Install" ></Button>
-                        </Link>
+                <div className="sm:col-12 md:col-6 lg:col-4 xl:col-2"  style={{ borderColor: 'rgba(255, 0, 0, 0)'}}>
+                    <div className={styles.productgriditem}>
+                            <img src={data.logo || 'images.png'} style={{ width: '8rem' }}/>
+                            <div className={styles.productname}>{data.title}</div>
+                            <div className={styles.productdescription}>{data.description}</div>
+                            <Link href={data.title}>
+                                <Button icon="pi pi-plus-circle" label="Install" ></Button>
+                            </Link>
                     </div>
+                </div>
+        );
+    }
+
+    const renderHeader = () => {
+        return (
+            <div className="grid grid-nogutter">
+                <div className="col-6" style={{textAlign: 'left'}}>
+                    <Dropdown optionLabel="label" placeholder="Filter Category"/>
                 </div>
             </div>
         );
     }
+    const header = renderHeader();
 
     return (
         <div className="p-4">
-            <div className={styles.dataviewdemo}>
+            <div className={styles.dataview}>
                 <Card>
-                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={45} />
+                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={45} header={header}/>
                 </Card>
             </div>
         </div>
