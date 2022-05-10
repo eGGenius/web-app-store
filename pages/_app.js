@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { UserContext } from '../lib/context';
+import { useUserData } from '../lib/hooks';
+
 import Head from 'next/head';
 import MenuBar from '../components/MenuBar';
 
@@ -9,14 +12,14 @@ import "primeicons/primeicons.css";                                //icons
 import "primeflex/primeflex.css"
  
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Toaster } from 'react-hot-toast';
 
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   
+  const userData = useUserData();
   return (
-    <>
+    <UserContext.Provider value={userData}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <title>WebApp-Store</title>
@@ -27,8 +30,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <MenuBar/>
       <Component {...pageProps} />
-      <Toaster />
-    </>
+    </UserContext.Provider>
   );
 }
 

@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { UserContext } from '../lib/context';
 import React from 'react';
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
@@ -6,6 +8,7 @@ import { Card } from 'primereact/card';
 import Link from "next/link";
 
 export default function MenuBar() {
+    const { user, username } = useContext(UserContext)
     
     const router = useRouter();
     const items = [
