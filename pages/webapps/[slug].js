@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { InputText } from 'primereact/inputtext';
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import EnterButton from '../../components/EnterButton';
+import SignInOutButton from '../../components/SignInOutButton';
 import { UserContext } from '../../lib/context';
 import { useContext } from 'react';
 
@@ -54,7 +54,7 @@ export default function StoreDetailViewPage(props) {
                             <div className="field col">      
                             {user
                                 ? <Button label="Install" className="w-full" type="submit" />
-                                : <EnterButton type="button" />
+                                : <SignInOutButton/>
                             }
                             </div>
                         </div>

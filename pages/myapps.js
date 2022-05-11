@@ -3,7 +3,7 @@ import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 import useSWR from 'swr'
 
-import EnterButton from '../components/EnterButton';
+import SignInOutButton from '../components/SignInOutButton';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -64,7 +64,7 @@ export default function MyAppsPage() {
                         <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
                         <Column body={actionBodyTemplate} ></Column>
                     </DataTable>
-                    : <EnterButton type="button" />
+                    : <SignInOutButton/>
                 }
             </Card>
         </div>

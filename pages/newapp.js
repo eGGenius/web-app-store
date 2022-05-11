@@ -2,7 +2,7 @@ import { Card } from "primereact/card"
 import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 
-import EnterButton from '../components/EnterButton';
+import SignInOutButton from '../components/SignInOutButton';
 
 import CreateAppForm from "../components/CreateAppForm"
 
@@ -14,7 +14,7 @@ export default function NewAppPage({ }) {
             <Card>
                 {user
                     ? <CreateAppForm/>
-                    : <EnterButton type="button" />
+                    : <SignInOutButton/>
                 }
             </Card>
         </div>

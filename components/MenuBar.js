@@ -3,7 +3,7 @@ import { Menubar } from 'primereact/menubar';
 import { useRouter } from 'next/router';
 import { Card } from 'primereact/card';
 import Link from "next/link";
-import EnterButton from '../components/EnterButton';
+import SignInOutButton from '../components/SignInOutButton';
 
 export default function MenuBar() {
     
@@ -27,7 +27,7 @@ export default function MenuBar() {
     ];
 
     const start = <Link href="/"><img  alt="logo" src="logo.png" height="40" className="mr-3"></img></Link>;
-    const end = <EnterButton/>
+    const end = <SignInOutButton/>
 
     return (
         <div className="p-4">
