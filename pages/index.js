@@ -26,7 +26,7 @@ export default function Home({ data }) {
         return (
             <div className="grid grid-nogutter">
                 <div className="col-6" style={{textAlign: 'left'}}>
-                    <Dropdown optionLabel="label" placeholder="Filter Category"/>
+                    <Dropdown optionLabel="label" placeholder="Filter by Category"/>
                 </div>
             </div>
         );
@@ -52,4 +52,18 @@ export async function getServerSideProps() {
   
     // Pass data to the page via props
     return { props: { data } }
+  }
+
+  export async function getServerSidProps(context) {
+    const postsQuery = firestore
+      .collectionGroup('posts')
+      .where('published', '==', true)
+      .orderBy('createdAt', 'desc')
+      .limit(LIMIT);
+  
+    const posts = (await postsQuery.get()).docs.map(postToJSON);
+  
+    return {
+      props: { posts }, // will be passed to the page component as props
+    };
   }

@@ -26,7 +26,7 @@ function SignInButton() {
   return (
     <Link href={'/enter'}>
       <Button type="button" >
-          <i className="pi pi-google px-2"></i>
+          <i className="pi pi-sign-out"></i>
           <span className="px-3">Sign in</span>
       </Button>
       </Link>

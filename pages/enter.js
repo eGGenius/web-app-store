@@ -1,9 +1,13 @@
-import { auth, firestore, googleAuthProvider } from '..lib/firebase';
-import { UserContext } from '..lib/context';
-import Metatags from '..components/Metatags';
+import { auth, firestore, googleAuthProvider } from '../lib/firebase';
+import { UserContext } from '../lib/context';
 
 import { useEffect, useState, useCallback, useContext } from 'react';
-import debounce from 'lodash.debounce';
+import Link from 'next/link';
+import debounce from 'debounce';
+
+import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
+import { InputText } from 'primereact/inputtext'
 
 export default function Enter(props) {
   const { user, username } = useContext(UserContext);
@@ -13,33 +17,37 @@ export default function Enter(props) {
   // 3. user signed in, has username <SignOutButton />
   return (
     <main>
-      <Metatags title="Enter" description="Sign up for this amazing app!" />
       {user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton />}
     </main>
   );
 }
 
-// Sign in with Google button
+// Sign in with Google Button
 function SignInButton() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
   };
 
   return (
-    <>
-      <button className="btn-google" onClick={signInWithGoogle}>
-        <img src={'/google.png'} width="30px" /> Sign in with Google
-      </button>
-      <button onClick={() => auth.signInAnonymously()}>
-        Sign in Anonymously
-      </button>
-    </>
+    <div className=" p-4">
+      <Card>
+        <Button className="btn-google" onClick={signInWithGoogle}>
+          <i className="pi pi-google px-2"></i> Sign in with Google
+        </Button>
+      </Card>
+    </div>
   );
 }
 
-// Sign out button
+// Sign out Button
 function SignOutButton() {
-  return <button onClick={() => auth.signOut()}>Sign Out</button>;
+  return <div className=" p-4">
+    <Card>
+      <Link href='/'>
+       <Button icon="pi pi-shopping-cart" label='Back to Store'/>
+       </Link>
+    </Card>
+  </div>
 }
 
 // Username form
@@ -107,25 +115,18 @@ function UsernameForm() {
 
   return (
     !username && (
-      <section>
-        <h3>Choose Username</h3>
-        <form onSubmit={onSubmit}>
-          <input name="username" placeholder="myname" value={formValue} onChange={onChange} />
-          <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
-          <button type="submit" className="btn-green" disabled={!isValid}>
-            Choose
-          </button>
-
-          <h3>Debug State</h3>
-          <div>
-            Username: {formValue}
-            <br />
-            Loading: {loading.toString()}
-            <br />
-            Username Valid: {isValid.toString()}
-          </div>
-        </form>
-      </section>
+      <div className=" p-4">
+        <Card>
+          <h3>Choose Username</h3>
+          <form onSubmit={onSubmit}>
+            <InputText placeholder="new username" value={formValue} onChange={onChange} />
+            <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+            <Button type="submit" className="p-button-success" disabled={!isValid}>
+              Choose
+            </Button>
+          </form>
+        </Card>
+      </div>
     )
   );
 }
