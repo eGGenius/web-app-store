@@ -26,7 +26,7 @@ export default function MenuBar() {
         }
     ];
 
-    const start = <Link href="/"><img  alt="logo" src="logo.png" height="40" className="mr-3"></img></Link>;
+    const start = <Link href="/"><img  alt="logo" src="/logo.png" height="40" className="mr-3"></img></Link>;
     const end = <SignInOutButton/>
 
     return (

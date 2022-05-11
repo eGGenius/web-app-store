@@ -4,9 +4,10 @@ import { useRouter } from 'next/router';
 import { InputText } from 'primereact/inputtext';
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import SignInOutButton from '../../components/SignInOutButton';
-import { UserContext } from '../../lib/context';
+import SignInOutButton from '../components/SignInOutButton';
+import { UserContext } from '../lib/context';
 import { useContext } from 'react';
+import { firestore } from '../lib/firebase';
 
 export default function StoreDetailViewPage(props) {
     const { user } = useContext(UserContext);
@@ -17,7 +18,9 @@ export default function StoreDetailViewPage(props) {
         e.preventDefault()
         const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/create/' + name;
         const content = {
-            "image": data.image
+            "image": data.image,
+            "logo": data.logo,
+            "webapp": data.title
         }
         const res = await fetch(url, {
             method: 'POST',
@@ -51,11 +54,11 @@ export default function StoreDetailViewPage(props) {
                     <div className="p-fluid grid">
                         <div class="col"></div>
                         <div className="col-6">
-                            <div className="field col">      
-                            {user
-                                ? <Button label="Install" className="w-full" type="submit" />
-                                : <SignInOutButton/>
-                            }
+                            <div className="field col">
+                                {user
+                                    ? <Button label="Install" className="w-full" type="submit" />
+                                    : <SignInOutButton />
+                                }
                             </div>
                         </div>
                         <div class="col"></div>
@@ -67,11 +70,14 @@ export default function StoreDetailViewPage(props) {
 }
 
 export async function getServerSideProps(context) {
-    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/templates/` + context.params.slug
-    const res = await fetch(url)
-    const data = await res.json()
+    const webappsRef = firestore.collection('webapps');
+    const query = webappsRef.where('title', '==', context.params.slug).limit(1);
+    const result = (await query.get());
+    let data = [];
 
-    // Pass data to the page via props
+    result.forEach(doc => {
+        data = doc.data();
+    });
     return {
         props: {
             data

@@ -4,6 +4,7 @@ import styles from "../styles/index.module.css";
 import Link from 'next/link';
 import { Card } from 'primereact/card';
 import { Dropdown } from 'primereact/dropdown';
+import { firestore } from '../lib/firebase';
 
 
 export default function Home({ data }) {
@@ -14,7 +15,7 @@ export default function Home({ data }) {
                             <img src={data.logo || 'images.png'} style={{ width: '8rem' }}/>
                             <div className={styles.productname}>{data.title}</div>
                             <div className={styles.productdescription}>{data.description}</div>
-                            <Link href={'webapps/' + data.title}>
+                            <Link href={data.title}>
                                 <Button icon="pi pi-plus-circle" label="Install" ></Button>
                             </Link>
                     </div>
@@ -45,25 +46,11 @@ export default function Home({ data }) {
 }
 
 export async function getServerSideProps() {
-    // Fetch data from external API
-    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/templates`
-    const res = await fetch(url)
-    const data = await res.json()
+    let result = await firestore.collection('webapps').get();
+    let data = [];
   
-    // Pass data to the page via props
+    result.forEach(doc => {
+        data.push(doc.data());
+    });
     return { props: { data } }
-  }
-
-  export async function getServerSidProps(context) {
-    const postsQuery = firestore
-      .collectionGroup('posts')
-      .where('published', '==', true)
-      .orderBy('createdAt', 'desc')
-      .limit(LIMIT);
-  
-    const posts = (await postsQuery.get()).docs.map(postToJSON);
-  
-    return {
-      props: { posts }, // will be passed to the page component as props
-    };
-  }
+}

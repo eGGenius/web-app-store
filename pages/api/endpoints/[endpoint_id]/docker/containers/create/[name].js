@@ -9,10 +9,14 @@ export default async function handler(req, res) {
 export async function createContainer(name, details) {
     const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name;
     const detail = JSON.parse(details)
-    const labelName = "traefik.http.routers." + name + ".rule"
-    const labelValue = "Host(`" + name + ".webapp-store.de`)"
-    const label1 = "{" + labelName + labelValue + "}"
-    const content = {"image": detail.image,"HostConfig":{ "PublishAllPorts": true },"Labels": {[labelName]: labelValue}}
+    console.log(detail)
+    const labelName1 = "traefik.http.routers." + name + ".rule"
+    const labelValue1 = "Host(`" + name + ".webapp-store.de`)"
+    const labelName2 = "logo"
+    const labelValue2 = detail.logo
+    const labelName3 = "webapp"
+    const labelValue3 = detail.webapp
+    const content = {"image": detail.image,"HostConfig":{ "PublishAllPorts": true },"Labels": {[labelName1]: labelValue1,[labelName2]: labelValue2,[labelName3]: labelValue3}}
     const res = await fetch(url, {
         method: 'POST',
         withCredentials: true,

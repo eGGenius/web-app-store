@@ -33,10 +33,14 @@ export default function MyAppsPage() {
         );
     }
     const linkBodyTemplate = (rowData) => {
-        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank">http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
+        console.log(rowData)
+        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank"><img src={rowData.Labels.logo} height="40px" style={{marginRight: '1rem'}}/>http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
     }
     const nameBodyTemplate = (rowData) => {
         return `${rowData.Names[0].slice(1)}`;
+    }
+    const webAppBodyTemplate = (rowData) => {
+        return `${rowData.Labels.webapp}`;
     }
     const createdBodyTemplate = (rowData) => {
         const date = new Date(rowData.Created*1000);
@@ -61,6 +65,7 @@ export default function MyAppsPage() {
                     ?<DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
                         <Column field="Link" header="Link" body={linkBodyTemplate} sortable></Column>
                         <Column field="Name" header="Name" body={nameBodyTemplate} sortable></Column>
+                        <Column field="WebApp" header="WebApp" body={webAppBodyTemplate} sortable></Column>
                         <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
                         <Column body={actionBodyTemplate} ></Column>
                     </DataTable>
