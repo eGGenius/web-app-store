@@ -9,12 +9,12 @@ import { Dropdown } from 'primereact/dropdown';
 export default function Home({ data }) {
     const renderGridItem = (data) => {
         return (
-                <div className="sm:col-12 md:col-6 lg:col-4 xl:col-2"  style={{ borderColor: 'rgba(255, 0, 0, 0)'}}>
+                <div className={"sm:col-12 md:col-6 lg:col-4 xl:col-2"}  style={{ borderColor: 'rgba(255, 0, 0, 0)'}}>
                     <div className={styles.productgriditem}>
                             <img src={data.logo || 'images.png'} style={{ width: '8rem' }}/>
                             <div className={styles.productname}>{data.title}</div>
                             <div className={styles.productdescription}>{data.description}</div>
-                            <Link href={data.title}>
+                            <Link href={'webapps/' + data.title}>
                                 <Button icon="pi pi-plus-circle" label="Install" ></Button>
                             </Link>
                     </div>
@@ -37,7 +37,7 @@ export default function Home({ data }) {
         <div className="p-4">
             <div className={styles.dataview}>
                 <Card>
-                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={45} header={header}/>
+                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={60} header={header}/>
                 </Card>
             </div>
         </div>

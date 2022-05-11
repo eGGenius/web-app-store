@@ -25,7 +25,3 @@
     margin-left: -0.5rem;
     margin-top: -0.5rem;
 }
-
-#__next > div:nth-child(2) > div > div > div > div > div > div.p-dataview-content > div {
-    display: none;
-}

@@ -1,5 +1,9 @@
 import React, { useRef } from 'react';
+import { UserContext } from '../lib/context';
+import { useContext } from 'react';
 import useSWR from 'swr'
+
+import EnterButton from '../components/EnterButton';
 
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
@@ -11,6 +15,7 @@ import { Toast } from 'primereact/toast';
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MyAppsPage() {
+    const { user } = useContext(UserContext);
     const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/myapps`
     const headerData = {headers: {"x-api-key": "ptr_lD5Jv9Lno8tX5dxE9TxE6Y1Q3vlG8nmmuvo7rJ1dYO4="}}
     const { data, error } = useSWR([url, headerData], fetcher, { refreshInterval: 2000 })
@@ -52,12 +57,15 @@ export default function MyAppsPage() {
         <div className=" p-4">
             <Toast ref={toast} />
             <Card>
-                <DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
-                    <Column field="Link" header="Link" body={linkBodyTemplate} sortable></Column>
-                    <Column field="Name" header="Name" body={nameBodyTemplate} sortable></Column>
-                    <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
-                    <Column body={actionBodyTemplate} ></Column>
-                </DataTable>
+                {user
+                    ?<DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
+                        <Column field="Link" header="Link" body={linkBodyTemplate} sortable></Column>
+                        <Column field="Name" header="Name" body={nameBodyTemplate} sortable></Column>
+                        <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
+                        <Column body={actionBodyTemplate} ></Column>
+                    </DataTable>
+                    : <EnterButton type="button" />
+                }
             </Card>
         </div>
     )
