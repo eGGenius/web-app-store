@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
-    console.log(req.method)
+    let apiKey = req.headers.apikey
     if (req.method == 'DELETE') {
-        let container = await deleteContainer(req.query.container_id)
+        let container = await deleteContainer(req.query.container_id, apiKey)
         res
             .status(200)
             .json(container)
@@ -11,15 +11,14 @@ export default async function handler(req, res) {
 
 }
 
-export async function deleteContainer(id) {
-    console.log(id)
+export async function deleteContainer(id, apiKey) {
     const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/' + id + '?force=true';
     const res = await fetch(url, {
         method: 'DELETE',
         withCredentials: true,
         headers: {
             "Content-Type": "application/json",
-            "x-api-key": process.env.PORTAINER_KEY
+            "x-api-key": apiKey
         },
         body: {"force": true}
     })
