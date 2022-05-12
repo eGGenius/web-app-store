@@ -44,8 +44,8 @@ function SignOutButton() {
   return <div className=" p-4">
     <Card>
       <Link href='/'>
-       <Button icon="pi pi-shopping-cart" label='Back to Store'/>
-       </Link>
+        <Button icon="pi pi-shopping-cart" label='Back to Store' />
+      </Link>
     </Card>
   </div>
 }
@@ -71,6 +71,23 @@ function UsernameForm() {
     batch.set(usernameDoc, { uid: user.uid });
 
     await batch.commit();
+    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/users';
+    const content = {
+      "username": formValue,
+      "role": 2,
+      "user": {
+        "uid": `${user.uid}`
+      }
+    }
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(content)
+    })
+    const response = await res.json()
+    const portainerJwt = await response.portainerUserId
   };
 
   const onChange = (e) => {
@@ -105,7 +122,6 @@ function UsernameForm() {
       if (username.length >= 3) {
         const ref = firestore.doc(`usernames/${username}`);
         const { exists } = await ref.get();
-        console.log('Firestore read executed!');
         setIsValid(!exists);
         setLoading(false);
       }
@@ -141,4 +157,8 @@ function UsernameMessage({ username, isValid, loading }) {
   } else {
     return <p></p>;
   }
+}
+
+function CreatePortainerUser(username) {
+
 }

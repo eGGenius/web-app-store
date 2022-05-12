@@ -40,7 +40,7 @@ export default function StoreDetailViewPage(props) {
                 <form onSubmit={createContainer}>
                     <br></br>
                     <div className="p-fluid grid">
-                        <div class="col"></div>
+                        <div className="col"></div>
                         <div className="col-6">
                             <span className="p-float-label">
                                 <InputText id="in" type="text"
@@ -49,10 +49,10 @@ export default function StoreDetailViewPage(props) {
                                 <label>Name</label>
                             </span>
                         </div>
-                        <div class="col"></div>
+                        <div className="col"></div>
                     </div>
                     <div className="p-fluid grid">
-                        <div class="col"></div>
+                        <div className="col"></div>
                         <div className="col-6">
                             <div className="field col">
                                 {user
@@ -61,7 +61,7 @@ export default function StoreDetailViewPage(props) {
                                 }
                             </div>
                         </div>
-                        <div class="col"></div>
+                        <div className="col"></div>
                     </div>
                 </form>
             </Card>
