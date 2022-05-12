@@ -8,13 +8,12 @@ import { Button } from 'primereact/button';
 import { Chip } from 'primereact/chip';
 
 export default function SignInOutButton() {
-  const { user, username } = useContext(UserContext);
-
+  const { user } = useContext(UserContext);
 
   return (
     <main>
       {user ?
-        <SignOutSection name={`${username}`} user={user} />
+        <SignOutSection />
         :
         <SignInButton />
       }
@@ -36,10 +35,12 @@ function SignInButton() {
 }
 
 // Sign out button
-function SignOutSection({ name, user }) {
+function SignOutSection() {
+  const { user, username } = useContext(UserContext);
+
   return (
     <div className="flex align-items-center ">
-      <Chip label={'@' + name} image={user?.photoURL || '/hacker.png'} style={{borderRadius: '14px'}} className="m-2"/>
+      <Chip label={'@' + username} image={user?.photoURL || '/hacker.png'} style={{ borderRadius: '14px' }} className="m-2" />
       <Button icon="pi pi-sign-out" className="google p-2" aria-label="Sign in with Google" onClick={() => auth.signOut()}>
       </Button>
     </div>

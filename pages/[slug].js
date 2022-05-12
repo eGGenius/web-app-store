@@ -26,7 +26,6 @@ export default function StoreDetailViewPage(props) {
             method: 'POST',
             body: JSON.stringify(content)
         })
-        console.log(res)
         router.push('/myapps');
     }
 

@@ -6,9 +6,7 @@ export default async function handler(req, res) {
     const portainerApiKey = await getApiKey(portainerJwt)
     const success = await writeKeyToFirestore(req.body.user, portainerUserId, portainerApiKey)
 
-    res
-        .status(200)
-        .json(portainerUserId, success)
+    res.status(200).json({portainerApiKey})
 }
 
 let password = '';

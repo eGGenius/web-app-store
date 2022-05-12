@@ -87,7 +87,8 @@ function UsernameForm() {
       body: JSON.stringify(content)
     })
     const response = await res.json()
-    const portainerJwt = await response.portainerUserId
+    const ApiKey = await response.portainerApiKey
+    console.log('set Key to: ' + ApiKey)
   };
 
   const onChange = (e) => {
@@ -157,8 +158,4 @@ function UsernameMessage({ username, isValid, loading }) {
   } else {
     return <p></p>;
   }
-}
-
-function CreatePortainerUser(username) {
-
 }
