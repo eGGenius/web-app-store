@@ -2,6 +2,7 @@ import { firestore } from "../../../lib/firebase"
 
 export default async function handler(req, res) {   
     const portainerUserId  = await createPortainerUser(req.body.username)
+    const portainerTeamId  = await addUserToTeam(portainerUserId)
     const portainerJwt  = await getJWT(req.body.username)
     const portainerApiKey = await getApiKey(portainerJwt)
     const success = await writeKeyToFirestore(req.body.user, portainerUserId, portainerApiKey)
@@ -33,6 +34,28 @@ async function createPortainerUser(username) {
     const response = await res.json()
     portainerUserId = await response.Id
     return portainerUserId
+}
+
+async function addUserToTeam(portainerUserId) {
+    const url = process.env.PORTAINER_API + 'team_memberships';
+
+    const content = {
+        "userID": portainerUserId,
+        "teamID": 3,
+        "role": 2
+    }
+    const res = await fetch(url, {
+        method: 'POST',
+        withCredentials: true,
+        headers: {
+            "Content-Type": "application/json",
+            "x-api-key": process.env.PORTAINER_ADMIN_KEY
+        },
+        body: JSON.stringify(content)
+    })
+    const response = await res.json()
+    const portainerTeamId = await response.TeamID
+    return portainerTeamId
 }
 
 async function getJWT(username) {
