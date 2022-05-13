@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+
+import Image from 'next/image';
+
 import { Menubar } from 'primereact/menubar';
 import { useRouter } from 'next/router';
 import { Card } from 'primereact/card';
@@ -26,7 +29,7 @@ export default function MenuBar() {
         }
     ];
 
-    const start = <Link href="/"><img  alt="logo" src="/logo.png" height="40" className="mr-3"></img></Link>;
+    const start = <Link href="/"><Image  alt="logo" src="/logo2.png" height="40" width="90"className="mr-3" ></Image></Link>;
     const end = <SignInOutButton/>
 
     return (

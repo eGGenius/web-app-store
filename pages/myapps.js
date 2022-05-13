@@ -34,7 +34,7 @@ export default function MyAppsPage() {
         );
     }
     const linkBodyTemplate = (rowData) => {
-        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank"><img src={rowData.Labels.logo} height="40px" style={{ marginRight: '1rem' }} />http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
+        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Labels.logo} height="40px" style={{ marginRight: '1rem' }} />http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
     }
     const nameBodyTemplate = (rowData) => {
         return `${rowData.Names[0].slice(1)}`;

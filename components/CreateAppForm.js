@@ -1,5 +1,3 @@
-import { Checkbox } from 'primereact/checkbox'
-
 export default function CreateAppForm({ }) {
     return (
         <>
@@ -9,27 +7,27 @@ export default function CreateAppForm({ }) {
             <ul>
                 <li>
                     <h5>Username</h5>
-                    <p className='text-sm'>Your Username</p>
+                    <p className="text-sm">Your Username</p>
                 </li>
                 <br />
                 <li>
                     <h5>WebApp Name</h5>
-                    <p className='text-sm'>'Username/WebApp Name' will be the Name of the WebApp</p>
+                    <p className="text-sm">sername/WebApp Name will be the Name of the WebApp</p>
                 </li>
                 <br />
                 <li>
                     <h5>WebApp Logo</h5>
-                    <p className='text-sm'>PNG Logo</p>
+                    <p className="text-sm">PNG Logo</p>
                 </li>
                 <br />
                 <li>
                     <h5>WebApp Description</h5>
-                    <p className='text-sm'>one sentance that describes the WebApp</p>
+                    <p className="text-sm">one sentance that describes the WebApp</p>
                 </li>
                 <br />
                 <li>
                     <h5>Docker Command</h5>
-                    <p className='text-sm'>Docker Command to run the WebApp (Compose will be supported soon)</p>
+                    <p className="text-sm">Docker Command to run the WebApp (Compose will be supported soon)</p>
                 </li>
             </ul>
             <br />

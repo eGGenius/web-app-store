@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Card } from 'primereact/card';
 import { Dropdown } from 'primereact/dropdown';
 import { firestore } from '../lib/firebase';
+import Image from 'next/image';
 
 
 export default function Home({ data }) {
@@ -12,7 +13,7 @@ export default function Home({ data }) {
         return (
                 <div className={"sm:col-12 md:col-6 lg:col-4 xl:col-2"}  style={{ borderColor: 'rgba(255, 0, 0, 0)'}}>
                     <div className={styles.productgriditem}>
-                            <img src={data.logo || 'images.png'} style={{ width: '8rem' }}/>
+                            <Image src={data.logo || 'images.png'} width= '80' height='80'/>
                             <div className={styles.productname}>{data.title}</div>
                             <div className={styles.productdescription}>{data.description}</div>
                             <Link href={data.title}>

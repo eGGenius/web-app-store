@@ -13,7 +13,7 @@ export async function createContainer(name, details, apiKey, username) {
     const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name+ '_' + username;
     const detail = JSON.parse(details)
     const labelName1 = "traefik.http.routers." + name + '_' + username + ".rule"
-    const labelValue1 = "Host(`" + name + ".webapp-store.de`)"
+    const labelValue1 = "Host(`" + name + '_' + username + ".webapp-store.de`)"
     const labelName2 = "logo"
     const labelValue2 = detail.logo
     const labelName3 = "webapp"

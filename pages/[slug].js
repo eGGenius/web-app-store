@@ -8,6 +8,7 @@ import SignInOutButton from '../components/SignInOutButton';
 import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 import { firestore } from '../lib/firebase';
+import Image from 'next/image';
 
 export default function StoreDetailViewPage(props) {
     const { username, portainerApiKey } = useContext(UserContext);
@@ -32,7 +33,7 @@ export default function StoreDetailViewPage(props) {
     }
 
     const header =
-        <img alt="Card" src={data.logo} style={{ width: '10rem', margin: '1rem' }} />;
+        <Image alt="Card" height="80" width="80" src={data.logo} style={{ margin: '1rem' }} />;
 
 
     return (
