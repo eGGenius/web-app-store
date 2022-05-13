@@ -88,7 +88,6 @@ function UsernameForm() {
     })
     const response = await res.json()
     const ApiKey = await response.portainerApiKey
-    console.log('set Key to: ' + ApiKey)
   };
 
   const onChange = (e) => {

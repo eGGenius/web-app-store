@@ -1,37 +1,39 @@
-import {Form} from "react-bootstrap"
-import {Button} from "react-bootstrap"
+import { Checkbox } from 'primereact/checkbox'
 
-export default function CreateAppForm({}) {
+export default function CreateAppForm({ }) {
     return (
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicAppName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control placeholder="Enter Name of your Web App"/>
-            </Form.Group>
-            <Form.Group controlId="Icon Image" className="mb-3">
-                <Form.Label>Upload a Image that will serve as App Icon</Form.Label>
-                <Form.Control type="file"/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={3}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Dockerfile or Compose File</Form.Label>
-                <Form.Control as="textarea" rows={6}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="public">
-                <Form.Check type="checkbox" label="Public Web App"/>
-            </Form.Group>
-            <Form.Select aria-label="Category">
-                <option>Select the Category of your App</option>
-                <option value="1">Programming Language</option>
-                <option value="2">Database</option>
-                <option value="3">CMS</option>
-            </Form.Select> <br/>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+        <>
+            <h1>You have an idea of a new WebApp? </h1>
+            <h5>Great then send a email to <a href="mailto:webapp@webapp-store.de">webapp@webapp-store.de</a> that contains:</h5>
+            <br />
+            <ul>
+                <li>
+                    <h5>Username</h5>
+                    <p className='text-sm'>Your Username</p>
+                </li>
+                <br />
+                <li>
+                    <h5>WebApp Name</h5>
+                    <p className='text-sm'>'Username/WebApp Name' will be the Name of the WebApp</p>
+                </li>
+                <br />
+                <li>
+                    <h5>WebApp Logo</h5>
+                    <p className='text-sm'>PNG Logo</p>
+                </li>
+                <br />
+                <li>
+                    <h5>WebApp Description</h5>
+                    <p className='text-sm'>one sentance that describes the WebApp</p>
+                </li>
+                <br />
+                <li>
+                    <h5>Docker Command</h5>
+                    <p className='text-sm'>Docker Command to run the WebApp (Compose will be supported soon)</p>
+                </li>
+            </ul>
+            <br />
+            <h5>We will validate the WebApp and inform you when something is missing or add to the Store</h5>
+        </>
     )
 }
