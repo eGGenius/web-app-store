@@ -1,16 +1,18 @@
 export default async function handler(req, res) {
-    let apiKey = req.headers.xapikey
-    const container  = await createContainer(req.query.name, req.body, apiKey)
+    const apiKey = req.headers.xapikey
+    const username = req.headers.username
+    console.log(username)
+    const container  = await createContainer(req.query.name, req.body, apiKey, username)
     const start  = await startContainer(container.Id, apiKey)
     res
         .status(200)
         .json(container, start)
 }
 
-export async function createContainer(name, details, apiKey) {
-    const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name;
+export async function createContainer(name, details, apiKey, username) {
+    const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name+ '_' + username;
     const detail = JSON.parse(details)
-    const labelName1 = "traefik.http.routers." + name + ".rule"
+    const labelName1 = "traefik.http.routers." + name + '_' + username + ".rule"
     const labelValue1 = "Host(`" + name + ".webapp-store.de`)"
     const labelName2 = "logo"
     const labelValue2 = detail.logo

@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import { firestore } from '../lib/firebase';
 
 export default function StoreDetailViewPage(props) {
-    const { user, portainerApiKey } = useContext(UserContext);
+    const { username, portainerApiKey } = useContext(UserContext);
     const data = props.data
     const router = useRouter();
     const [name, setName] = useState('');
@@ -25,7 +25,7 @@ export default function StoreDetailViewPage(props) {
         const key2 = 'ptr_uPC303iwVR3iDk9PnMOUx0/KMOXen9dYuNg4ECvX+Ws='
         const res = await fetch(url, {
             method: 'POST',
-            headers: { "xapikey": portainerApiKey },
+            headers: { "xapikey": portainerApiKey, "username": username },
             body: JSON.stringify(content)
         })
         router.push('/myapps');
@@ -56,7 +56,7 @@ export default function StoreDetailViewPage(props) {
                         <div className="col"></div>
                         <div className="col-6">
                             <div className="field col">
-                                {user
+                                {username
                                     ? <Button label="Install" className="w-full" type="submit" />
                                     : <SignInOutButton />
                                 }
