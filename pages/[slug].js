@@ -16,7 +16,7 @@ export default function StoreDetailViewPage(props) {
     const [name, setName] = useState('');
     const createContainer = async (e) => {
         e.preventDefault()
-        const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/create/' + name;
+        const url = '/api/endpoints/2/docker/containers/create/' + name;
         const content = {
             "image": data.image,
             "logo": data.logo,

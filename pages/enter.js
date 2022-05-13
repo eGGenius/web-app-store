@@ -71,7 +71,7 @@ function UsernameForm() {
     batch.set(usernameDoc, { uid: user.uid });
 
     await batch.commit();
-    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/users';
+    const url = '/api/users';
     const content = {
       "username": formValue,
       "role": 2,

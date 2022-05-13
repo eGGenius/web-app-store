@@ -18,7 +18,7 @@ export default function MyAppsPage() {
     const { portainerApiKey } = useContext(UserContext);
 
     //if (portainerApiKey){
-    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + `/api/myapps`
+    const url = '/api/myapps'
     const headerData = { headers: { "xapikey": portainerApiKey } }
     const { data, error } = useSWR([url, headerData], fetcher, { refreshInterval: 2000 })
     const toast = useRef(null);
@@ -80,7 +80,7 @@ export default function MyAppsPage() {
 }
 
 async function deleteContainer(container, portainerApiKey) {
-    const url = process.env.NEXT_PUBLIC_WEBAPP_STORE + '/api/endpoints/2/docker/containers/' + container.Id;
+    const url = '/api/endpoints/2/docker/containers/' + container.Id;
     const res = await fetch(url, {
         method: 'DELETE',
         headers: { 'apiKey': portainerApiKey},
