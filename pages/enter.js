@@ -70,7 +70,6 @@ function UsernameForm() {
     batch.set(userDoc, { username: formValue, photoURL: user.photoURL, displayName: user.displayName });
     batch.set(usernameDoc, { uid: user.uid });
 
-    await batch.commit();
     const url = '/api/users';
     const content = {
       "username": formValue,
@@ -88,7 +87,11 @@ function UsernameForm() {
     })
     const response = await res.json()
     const ApiKey = await response.portainerApiKey
-  };
+
+    batch.update(userDoc, { 'portainerApiKey': ApiKey });
+
+    await batch.commit();
+    };
 
   const onChange = (e) => {
     // Force form value typed in form to match correct format

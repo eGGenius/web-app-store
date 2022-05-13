@@ -1,11 +1,8 @@
-import { firestore } from "../../../lib/firebase"
-
 export default async function handler(req, res) {   
     const portainerUserId  = await createPortainerUser(req.body.username)
     const portainerTeamId  = await addUserToTeam(portainerUserId)
     const portainerJwt  = await getJWT(req.body.username)
     const portainerApiKey = await getApiKey(portainerJwt)
-    const success = await writeKeyToFirestore(req.body.user, portainerUserId, portainerApiKey)
 
     res.status(200).json({portainerApiKey})
 }
@@ -97,15 +94,4 @@ async function getApiKey(portainerJwt) {
     const response = await res.json()
     const rawAPIKey = await response.rawAPIKey
     return rawAPIKey
-}
-
-async function writeKeyToFirestore(user, portainerUserId, portainerApiKey) {
-    // Create refs for both documents
-    const userDoc = firestore.doc(`users/${user.uid}`);
-
-    // Commit both docs together as a batch write.
-    const batch = firestore.batch();
-    batch.update(userDoc, { 'portainerUserId': portainerUserId, 'portainerApiKey': portainerApiKey });
-
-    await batch.commit();
 }

@@ -8,11 +8,11 @@ import { Button } from 'primereact/button';
 import { Chip } from 'primereact/chip';
 
 export default function SignInOutButton() {
-  const { user } = useContext(UserContext);
+  const { user, username } = useContext(UserContext);
 
   return (
     <main>
-      {user ?
+      {username ?
         <SignOutSection />
         :
         <SignInButton />

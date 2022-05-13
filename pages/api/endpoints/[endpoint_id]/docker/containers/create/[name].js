@@ -1,7 +1,6 @@
 export default async function handler(req, res) {
     const apiKey = req.headers.xapikey
     const username = req.headers.username
-    console.log(username)
     const container  = await createContainer(req.query.name, req.body, apiKey, username)
     const start  = await startContainer(container.Id, apiKey)
     res
