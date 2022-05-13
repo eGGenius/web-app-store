@@ -99,13 +99,13 @@ async function getApiKey(portainerJwt) {
     return rawAPIKey
 }
 
-async function writeKeyToFirestore(user, portainerUserId, apiKey) {
+async function writeKeyToFirestore(user, portainerUserId, portainerApiKey) {
     // Create refs for both documents
     const userDoc = firestore.doc(`users/${user.uid}`);
 
     // Commit both docs together as a batch write.
     const batch = firestore.batch();
-    batch.update(userDoc, { 'portainerUserId': portainerUserId, 'portainerApiKey': apiKey });
+    batch.update(userDoc, { 'portainerUserId': portainerUserId, 'portainerApiKey': portainerApiKey });
 
     await batch.commit();
 }

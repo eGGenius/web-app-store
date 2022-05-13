@@ -11,6 +11,7 @@ service cloud.firestore {
       match /users/{userId} {
       	allow read;
         allow create: if isValidUser(userId);
+        allow update: if isValidUser(userId);
       }
       
       match /usernames/{username} {
