@@ -12,7 +12,7 @@ export default function CreateAppForm({ }) {
                 <br />
                 <li>
                     <h5>WebApp Name</h5>
-                    <p className="text-sm">sername/WebApp Name will be the Name of the WebApp</p>
+                    <p className="text-sm">Username/WebApp Name will be the Name of the WebApp</p>
                 </li>
                 <br />
                 <li>
