@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     res.status(200).json(myapps)
 }
 export async function getMyApps(apiKey) {
-    const url = process.env.PORTAINER_API + "endpoints/2/docker/containers/json?all=true";
+    const url = process.env.PORTAINER_API + "endpoints/1/docker/containers/json?all=true";
     const res = await fetch(url, {
         method: 'GET',
         withCredentials: true,

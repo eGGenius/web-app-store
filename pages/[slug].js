@@ -17,7 +17,7 @@ export default function StoreDetailViewPage(props) {
     const [name, setName] = useState('');
     const createContainer = async (e) => {
         e.preventDefault()
-        const url = '/api/endpoints/2/docker/containers/create/' + name;
+        const url = '/api/endpoints/1/docker/containers/create/' + name;
         const content = {
             "image": data.image,
             "logo": data.logo,
@@ -37,7 +37,7 @@ export default function StoreDetailViewPage(props) {
 
 
     return (
-        <div className="p-4" style={{ 'text-align': 'center' }}>
+        <div className="p-4" style={{ 'textAlign': 'center' }}>
             <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }} >
                 <form onSubmit={createContainer}>
                     <br></br>

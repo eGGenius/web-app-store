@@ -80,7 +80,7 @@ export default function MyAppsPage() {
 }
 
 async function deleteContainer(container, portainerApiKey) {
-    const url = '/api/endpoints/2/docker/containers/' + container.Id;
+    const url = '/api/endpoints/1/docker/containers/' + container.Id;
     const res = await fetch(url, {
         method: 'DELETE',
         headers: { 'apiKey': portainerApiKey},

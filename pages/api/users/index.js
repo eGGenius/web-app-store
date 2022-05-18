@@ -11,7 +11,7 @@ let password = '';
 let portainerUserId = 0;
 
 async function createPortainerUser(username) {
-    password = Math.random().toString(36).slice(-8);
+    password = Math.random().toString(36).slice(-22);
     const url = process.env.PORTAINER_API + 'users';
 
     const content = {
@@ -38,7 +38,7 @@ async function addUserToTeam(portainerUserId) {
 
     const content = {
         "userID": portainerUserId,
-        "teamID": 3,
+        "teamID": 1,
         "role": 2
     }
     const res = await fetch(url, {

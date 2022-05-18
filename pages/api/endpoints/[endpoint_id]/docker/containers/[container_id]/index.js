@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 }
 
 export async function deleteContainer(id, apiKey) {
-    const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/' + id + '?force=true';
+    const url = process.env.PORTAINER_API + 'endpoints/1/docker/containers/' + id + '?force=true';
     const res = await fetch(url, {
         method: 'DELETE',
         withCredentials: true,

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 }
 
 export async function createContainer(name, details, apiKey, username) {
-    const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/create?name=' + name+ '_' + username;
+    const url = process.env.PORTAINER_API + 'endpoints/1/docker/containers/create?name=' + name+ '_' + username;
     const detail = JSON.parse(details)
     const labelName1 = "traefik.http.routers." + name + '_' + username + ".rule"
     const labelValue1 = "Host(`" + name + '_' + username + ".webapp-store.de`)"
@@ -31,7 +31,7 @@ export async function createContainer(name, details, apiKey, username) {
 }
 
 async function startContainer(container_id, apiKey) {
-    const url = process.env.PORTAINER_API + 'endpoints/2/docker/containers/' + container_id + '/start';
+    const url = process.env.PORTAINER_API + 'endpoints/1/docker/containers/' + container_id + '/start';
     const res = await fetch(url, {
         method: 'POST',
         withCredentials: true,
