@@ -15,31 +15,33 @@ export default function StoreDetailViewPage(props) {
     const data = props.data
     const router = useRouter();
     const [name, setName] = useState('');
-    const createContainer = async (e) => {
+    const createWebApp = async (e) => {
+        const webappname = name + '-' + username;
+        const firestoreStackFileContent = data.stackFileContent;
+        const stackFileContent = firestoreStackFileContent.replaceAll("$webappname$", webappname)
         e.preventDefault()
-        const url = '/api/endpoints/1/docker/containers/create/' + name;
+        const url = '/api/stacks';
         const content = {
-            "image": data.image,
+            "stackFileContent": stackFileContent,
             "logo": data.logo,
             "webapp": data.title
         }
-        const key2 = 'ptr_uPC303iwVR3iDk9PnMOUx0/KMOXen9dYuNg4ECvX+Ws='
         const res = await fetch(url, {
             method: 'POST',
-            headers: { "xapikey": portainerApiKey, "username": username },
+            headers: { "xapikey": portainerApiKey, "username": username, "name": name  },
             body: JSON.stringify(content)
         })
         router.push('/myapps');
     }
 
     const header =
-        <Image alt="Card" height="80" width="80" src={data.logo} style={{ margin: '1rem' }} />;
+        <Image alt="Card" height="80" width="80" src={data.logo || '/images.png'} style={{ margin: '1rem' }} />;
 
 
     return (
         <div className="p-4" style={{ 'textAlign': 'center' }}>
             <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }} >
-                <form onSubmit={createContainer}>
+                <form onSubmit={createWebApp}>
                     <br></br>
                     <div className="p-fluid grid">
                         <div className="col"></div>

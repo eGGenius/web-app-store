@@ -13,7 +13,7 @@ export default function Home({ data }) {
         return (
                 <div className={"sm:col-12 md:col-6 lg:col-4 xl:col-2"}  style={{ borderColor: 'rgba(255, 0, 0, 0)'}}>
                     <div className={styles.productgriditem}>
-                            <Image src={data.logo || 'images.png'} width= '80' height='80'/>
+                            <Image src={data.logo || '/images.png'} width= '80' height='80'/>
                             <div className={styles.productname}>{data.title}</div>
                             <div className={styles.productdescription}>{data.description}</div>
                             <Link href={data.title}>

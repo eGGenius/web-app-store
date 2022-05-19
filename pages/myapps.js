@@ -29,21 +29,21 @@ export default function MyAppsPage() {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteContainer(rowData, portainerApiKey).then(showError())} />
+                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteStack(rowData, portainerApiKey).then(showError())} />
             </React.Fragment>
         );
     }
     const linkBodyTemplate = (rowData) => {
-        return <a href={`http://${rowData.Names[0].slice(1)}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Labels.logo} height="40px" style={{ marginRight: '1rem' }} />http://{rowData.Names[0].slice(1)}.webapp-store.de</a>;
+        return <a href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} />{rowData.Name}.webapp-store.de</a>;
     }
     const nameBodyTemplate = (rowData) => {
-        return `${rowData.Names[0].slice(1)}`;
+        return `${rowData.Name}`;
     }
     const webAppBodyTemplate = (rowData) => {
-        return `${rowData.Labels.webapp}`;
+        return `${rowData.Env[0].value}`;
     }
     const createdBodyTemplate = (rowData) => {
-        const date = new Date(rowData.Created * 1000);
+        const date = new Date(rowData.CreationDate * 1000);
         return Intl.DateTimeFormat('de', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(date)
     }
 
@@ -79,11 +79,11 @@ export default function MyAppsPage() {
     }*/
 }
 
-async function deleteContainer(container, portainerApiKey) {
-    const url = '/api/endpoints/1/docker/containers/' + container.Id;
+async function deleteStack(stack, portainerApiKey) {
+    const url = '/api/stacks/' + stack.Id
     const res = await fetch(url, {
         method: 'DELETE',
         headers: { 'apiKey': portainerApiKey},
-        body: 'delete Container'
+        body: 'delete Stack'
     })
 }
