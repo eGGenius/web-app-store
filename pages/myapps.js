@@ -34,7 +34,7 @@ export default function MyAppsPage() {
             </React.Fragment>
         );
     }
-    const linkBodyTemplate = (rowData) => {
+    const useLinkBodyTemplate = (rowData) => {
         const [loadingValue, setloadingValue] = useState(0);
         const interval = useRef(null);
         useEffect(() => {
@@ -94,7 +94,7 @@ export default function MyAppsPage() {
             <Card>
                 {portainerApiKey
                     ? <DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
-                        <Column field="Link" header="Link" body={linkBodyTemplate} sortable></Column>
+                        <Column field="Link" header="Link" body={useLinkBodyTemplate} sortable></Column>
                         <Column field="Name" header="Name" body={nameBodyTemplate} sortable></Column>
                         <Column field="WebApp" header="WebApp" body={webAppBodyTemplate} sortable></Column>
                         <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
