@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { ProgressBar } from 'primereact/progressbar';
 import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 import useSWR from 'swr'
@@ -34,7 +35,37 @@ export default function MyAppsPage() {
         );
     }
     const linkBodyTemplate = (rowData) => {
-        return <a href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} />{rowData.Name}.webapp-store.de</a>;
+        const [loadingValue, setloadingValue] = useState(0);
+        const interval = useRef(null);
+        useEffect(() => {
+            let val = loadingValue;
+            interval.current = setInterval(() => {
+                val += + 5;
+    
+                if (val >= 100) {
+                    val = 100;
+                    toast.current.show({ severity: 'success', summary: rowData.Name + ' installed' });
+                    clearInterval(interval.current);
+                }
+    
+                setloadingValue(val);
+            }, 1000);
+    
+            return () => {
+                if (interval.current) {
+                    clearInterval(interval.current);
+                    interval.current = null;
+                }
+            }
+        }, []);
+        if (Math.floor(Date.now() / 1000) > rowData.CreationDate + 21) {
+            return (
+                <a href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} />{rowData.Name}.webapp-store.de</a>
+            )
+        }
+        else {
+            return <ProgressBar value={loadingValue}/>
+        }
     }
     const nameBodyTemplate = (rowData) => {
         return `${rowData.Name}`;
@@ -83,7 +114,7 @@ async function deleteStack(stack, portainerApiKey) {
     const url = '/api/stacks/' + stack.Id
     const res = await fetch(url, {
         method: 'DELETE',
-        headers: { 'apiKey': portainerApiKey},
+        headers: { 'apiKey': portainerApiKey },
         body: 'delete Stack'
     })
 }

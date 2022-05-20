@@ -33,7 +33,6 @@ export async function createStack(name, body, apiKey, username) {
         },
         body: JSON.stringify(content)
     })
-    console.log(res)
     return res.json()
 }
 
