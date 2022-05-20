@@ -48,6 +48,7 @@ export default function StoreDetailViewPage(props) {
                         <div className="col-6">
                             <span className="p-float-label">
                                 <InputText id="in" type="text"
+                                    keyfilter="alphanum"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)} />
                                 <label>Name</label>
