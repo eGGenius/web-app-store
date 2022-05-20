@@ -44,7 +44,6 @@ export default function MyAppsPage() {
     
                 if (val >= 100) {
                     val = 100;
-                    toast.current.show({ severity: 'success', summary: rowData.Name + ' installed' });
                     clearInterval(interval.current);
                 }
     
