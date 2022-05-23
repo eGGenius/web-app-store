@@ -39,7 +39,7 @@ export default function Home({ data }) {
         <div className="p-4">
             <div className={styles.dataview}>
                 <Card>
-                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={60} header={header}/>
+                    <DataView value={data} itemTemplate={renderGridItem} paginator rows={60} />
                 </Card>
             </div>
         </div>

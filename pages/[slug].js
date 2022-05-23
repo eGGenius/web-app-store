@@ -12,10 +12,12 @@ import Image from 'next/image';
 
 export default function StoreDetailViewPage(props) {
     const { username, portainerApiKey } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
     const data = props.data
     const router = useRouter();
     const [name, setName] = useState('');
     const createWebApp = async (e) => {
+        setLoading(true);
         const webappname = name + '-' + username;
         const firestoreStackFileContent = data.stackFileContent;
         const stackFileContent = firestoreStackFileContent.replaceAll("$webappname$", webappname)
@@ -31,6 +33,7 @@ export default function StoreDetailViewPage(props) {
             headers: { "xapikey": portainerApiKey, "username": username, "name": name  },
             body: JSON.stringify(content)
         })
+        setLoading(false);
         router.push('/myapps');
     }
 
@@ -61,7 +64,7 @@ export default function StoreDetailViewPage(props) {
                         <div className="col-6">
                             <div className="field col">
                                 {username
-                                    ? <Button label="Install" className="w-full" type="submit" />
+                                    ? <Button label="Install" className="w-full" type="submit" loading={loading}/>
                                     : <SignInOutButton />
                                 }
                             </div>

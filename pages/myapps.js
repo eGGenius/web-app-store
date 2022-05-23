@@ -30,7 +30,7 @@ export default function MyAppsPage() {
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteStack(rowData, portainerApiKey).then(showError())} />
+                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteStack(rowData, portainerApiKey) } />
             </React.Fragment>
         );
     }
@@ -63,7 +63,7 @@ export default function MyAppsPage() {
             )
         }
         else {
-            return <ProgressBar value={loadingValue}/>
+            return <ProgressBar value={loadingValue} showValue={false}/>
         }
     }
     const nameBodyTemplate = (rowData) => {
