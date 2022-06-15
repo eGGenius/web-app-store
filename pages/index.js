@@ -17,7 +17,7 @@ export default function Home({ data }) {
                             <div className={styles.productname}>{data.title}</div>
                             <div className={styles.productdescription}>{data.description}</div>
                             <Link href={data.title}>
-                                <Button icon="pi pi-plus-circle" label="Install" ></Button>
+                                <Button label={data.status || "Install WebApp" } disabled={data.status === 'Coming Soon'}></Button>
                             </Link>
                     </div>
                 </div>
