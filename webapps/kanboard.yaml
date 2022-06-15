@@ -1,0 +1,33 @@
+version: '3'
+services:
+  kanboard:
+    image: 'kanboard/kanboard:latest'
+    ports:
+      - ':80'
+      - ':443'
+    volumes:
+      - 'kanboard_data:/var/www/app/data'
+      - 'kanboard_plugins:/var/www/app/plugins'
+      - 'kanboard_ssl:/etc/nginx/ssl'
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+volumes:
+  kanboard_data: null
+  kanboard_plugins: null
+  kanboard_ssl: null
+networks:
+  default:
+    external:
+      name: traefik-public
