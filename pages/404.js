@@ -1,20 +1,14 @@
 import Link from 'next/link';
-import { Card } from 'primereact/card'
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 
 export default function Custom404() {
   return (
     <div className=" p-4">
       <Card>
-        <h1>404 - That page does not seem to exist...</h1>
-        <iframe
-          src="https://giphy.com/embed/l2JehQ2GitHGdVG9y"
-          width="480"
-          height="362"
-          frameBorder="0"
-          allowFullScreen
-        ></iframe>
+        <h1>404 - This page does not seem to exist...</h1>
         <Link href="/">
-          <button className="btn-blue">Go home</button>
+          <Button label="Go home"></Button>
         </Link>
       </Card>
     </div>

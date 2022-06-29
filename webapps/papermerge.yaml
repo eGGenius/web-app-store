@@ -1,0 +1,36 @@
+version: '3'
+services:
+  papermerge:
+    image: linuxserver/papermerge:latest
+    volumes:
+      - papermerge_config:/config
+      - papermerge_data:/data
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    ports:
+      - :8000
+    restart: unless-stopped
+
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 8000
+volumes:
+  papermerge_config: null
+  papermerge_data: null
+networks:
+  default:
+    external:
+      name: traefik-public
