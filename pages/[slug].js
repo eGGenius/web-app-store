@@ -9,6 +9,7 @@ import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 import { firestore } from '../lib/firebase';
 import Image from 'next/image';
+import ReactMarkdown from 'react-markdown'
 
 export default function StoreDetailViewPage(props) {
     const { username, portainerApiKey } = useContext(UserContext);
@@ -30,7 +31,7 @@ export default function StoreDetailViewPage(props) {
         }
         const res = await fetch(url, {
             method: 'POST',
-            headers: { "xapikey": portainerApiKey, "username": username, "name": name  },
+            headers: { "xapikey": portainerApiKey, "username": username, "name": name },
             body: JSON.stringify(content)
         })
         setLoading(false);
@@ -42,38 +43,48 @@ export default function StoreDetailViewPage(props) {
 
 
     return (
-        <div className="p-4" style={{ 'textAlign': 'center' }}>
-            <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }} >
-                <form onSubmit={createWebApp}>
-                    <br></br>
-                    <div className="p-fluid grid">
-                        <div className="col"></div>
-                        <div className="col-6">
-                            <span className="p-float-label">
-                                <InputText id="in" type="text"
-                                    keyfilter="alphanum"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)} />
-                                <label>Name</label>
-                            </span>
-                        </div>
-                        <div className="col"></div>
-                    </div>
-                    <div className="p-fluid grid">
-                        <div className="col"></div>
-                        <div className="col-6">
-                            <div className="field col">
-                                {username
-                                    ? <Button label="Install" className="w-full" type="submit" loading={loading}/>
-                                    : <SignInOutButton />
-                                }
+        <>
+            <div className="p-4" style={{ 'textAlign': 'center' }}>
+                <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }}>
+                    <form onSubmit={createWebApp}>
+                        <br></br>
+                        <div className="p-fluid grid">
+                            <div className="col"></div>
+                            <div className="col-6">
+                                <span className="p-float-label">
+                                    <InputText id="in" type="text"
+                                        keyfilter="alphanum"
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)} />
+                                    <label>Name</label>
+                                </span>
                             </div>
+                            <div className="col"></div>
                         </div>
-                        <div className="col"></div>
-                    </div>
-                </form>
-            </Card>
-        </div>
+                        <div className="p-fluid grid">
+                            <div className="col"></div>
+                            <div className="col-6">
+                                <div className="field col">
+                                    {username
+                                        ? <Button label="Install" className="w-full" type="submit" loading={loading} />
+                                        : <SignInOutButton />}
+                                </div>
+                            </div>
+                            <div className="col"></div>
+                        </div>
+                    </form>
+                </Card>
+            </div>
+            <div className="p-4">
+                {data.markdown ?
+                    <Card className='undeline'>
+                        <ReactMarkdown children={data.markdown.replace(/<br>/g, " \n")}/>
+                    </Card>
+                    :
+                    <></>
+                }
+            </div>
+        </>
     )
 }
 
