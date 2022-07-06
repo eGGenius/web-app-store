@@ -45,12 +45,11 @@ export default function StoreDetailViewPage(props) {
     return (
         <>
             <div className="p-4" style={{ 'textAlign': 'center' }}>
-                <Card title={data.title} subTitle={data.description} header={header} style={{ padding: '2rem' }}>
+                <Card title={data.title} subTitle={data.description} header={header} style={{ paddingTop: '1rem' }}>
                     <form onSubmit={createWebApp}>
-                        <br></br>
                         <div className="p-fluid grid">
-                            <div className="col"></div>
-                            <div className="col-6">
+                            <div className="col-2 md:col-3"></div>
+                            <div className="col-8 md:col-6">
                                 <span className="p-float-label">
                                     <InputText id="in" type="text"
                                         keyfilter="alphanum"
@@ -59,18 +58,18 @@ export default function StoreDetailViewPage(props) {
                                     <label>Name</label>
                                 </span>
                             </div>
-                            <div className="col"></div>
+                            <div className="col-2 md:col-3"></div>
                         </div>
                         <div className="p-fluid grid">
-                            <div className="col"></div>
-                            <div className="col-6">
+                            <div className="col-2 md:col-3"></div>
+                            <div className="col-8 md:col-6">
                                 <div className="field col">
                                     {username
                                         ? <Button label="Install" className="w-full" type="submit" loading={loading} />
                                         : <SignInOutButton />}
                                 </div>
                             </div>
-                            <div className="col"></div>
+                            <div className="col-2 md:col-3"></div>
                         </div>
                     </form>
                 </Card>

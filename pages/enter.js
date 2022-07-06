@@ -43,7 +43,7 @@ function SignInButton() {
 function SignOutButton() {
   return <div className=" p-4">
     <Card>
-      <Link href='/'>
+      <Link href='/store'>
         <Button icon="pi pi-shopping-cart" label='Back to Store' />
       </Link>
     </Card>

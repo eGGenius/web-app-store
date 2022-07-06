@@ -15,7 +15,7 @@ export default function MenuBar() {
         {
             label: 'Store',
             icon: 'pi pi-fw pi-shopping-cart',
-            command:()=>{ router.push('/'); }
+            command:()=>{ router.push('/store'); }
         },
         {
             label: 'WebApps',
