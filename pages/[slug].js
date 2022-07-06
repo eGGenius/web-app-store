@@ -78,7 +78,7 @@ export default function StoreDetailViewPage(props) {
             <div className="p-4">
                 {data.markdown ?
                     <Card className='undeline'>
-                        <ReactMarkdown children={data.markdown.replace(/<br>/g, " \n")}/>
+                        <ReactMarkdown>{data.markdown.replace(/<br>/g, " \n")}</ReactMarkdown>
                     </Card>
                     :
                     <></>
