@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <UserContext.Provider value={userData}>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/logo.png" />
         <title>WebApp-Store</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
