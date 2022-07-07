@@ -65,8 +65,8 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex">
-                            <Image className='pt-4 pl-1' alt="hero" height="500" width="600" src='/hero.png' layout="intrinsic" />
+                        <div className="sm:col-12 md:col-6 align-items-center flex">
+                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/hero.png' layout="intrinsic" />
                         </div>
                     </div>
                 </Card>
@@ -121,6 +121,52 @@ export default function Home() {
                                 <div className="text-900 mb-3 font-medium">Trusted Security</div>
                                 <span className="text-700 text-sm line-height-3">All WebApps run in a secure datacenter in Germany</span>
                             </div>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">Common </span>
+                            <span className="text-primary">UseCases</span>
+                        </div>
+                    </div>
+                    <div className="justify-content-center grid">
+                        <div className="sm:col-12 md:col-5 align-items-center text-center flex">
+                            <div className="text-center md:text-left md:pl-4">
+                                <div className="font-bold line-height-2 md:text-left text-4xl ">Collaboration</div>
+                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
+                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
+                            </div>
+                        </div>
+                        <div className="sm:col-12 md:col-5 flex">
+                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/undraw_Collaboration.png' layout="intrinsic" />
+                        </div>
+                    </div>
+                    <div className="justify-content-center grid">
+                        <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-2">
+                            <div className="text-center md:text-left md:pl-4">
+                                <div className="font-bold line-height-2 md:text-left text-4xl ">Online Calendar</div>
+                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
+                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
+                            </div>
+                        </div>
+                        <div className="flex sm:col-12 md:col-5 md:flex-order-1">
+                            <Image className=' pt-4 pl-1' alt="hero" height="800" width="920" src='/undraw_Online_calendar.png' layout="intrinsic" />
+                        </div>
+                    </div>
+                    <div className="justify-content-center grid">
+                        <div className="sm:col-12 md:col-5 align-items-center flex">
+                            <div className="text-center md:text-left md:pl-4">
+                                <div className="font-bold line-height-2 md:text-left text-4xl ">Scrum Board</div>
+                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
+                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
+                            </div>
+                        </div>
+                        <div className="sm:col-12 md:col-5 flex">
+                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/undraw_Scrum_board.png' layout="intrinsic" />
                         </div>
                     </div>
                 </Card>
