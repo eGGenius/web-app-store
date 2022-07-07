@@ -2,25 +2,70 @@ import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Carousel } from 'primereact/carousel';
 
 export default function Home() {
+    const responsiveOptions = [
+        {
+            breakpoint: '1024px',
+            numVisible: 3,
+            numScroll: 3
+        },
+        {
+            breakpoint: '900px',
+            numVisible: 2,
+            numScroll: 2
+        },
+        {
+            breakpoint: '800px',
+            numVisible: 1,
+            numScroll: 1
+        }
+    ];
+
+    const productTemplate = (data) => {
+        return (
+            <Link href={data.name}>
+                <Card className='cursor-pointer border-1 border-100 md:m-4 text-center shadow-0 hover:shadow-7'>
+                    <Image src={data.logo || '/images.png'} width='120' height='120' />
+                    <h1>{data.name}</h1>
+                    <h4>{data.description}</h4>
+                </Card>
+            </Link>
+        );
+    }
+
+    const products = [
+        { "id": "0", "link": "/Kanboard", "name": "Kanboard", "description": "Project Management", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/kanboard.png?alt=media&token=5de76267-1611-4b47-9cb3-febf7ad7011b" },
+        { "id": "1", "link": "/Nextcloud", "name": "Nextcloud", "description": "Productivity Platform", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/Nextcloud_Logo.svg.png?alt=media&token=1b3127e5-ba27-4616-8a96-9b9db1427e53"},
+        { "id": "2", "link": "/Code%20Server", "name": "Code Server", "description": "VS Code", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/vscode.png?alt=media&token=2e631410-ac69-4f40-aea2-5f8a24ba06d8"},
+        { "id": "3", "link": "/Wiki.js", "name": "Wiki.js", "description": "Wiki", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/wikijs.png?alt=media&token=ef6e07f8-b72b-495e-99fd-46b64e175db3"},
+        { "id": "4", "link": "/Plex", "name": "Plex", "description": "Personal Media Library", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/plex.png?alt=media&token=884166c2-7523-4932-839b-349f93db6cb5"},
+        { "id": "5", "link": "/Rocket.Chat", "name": "Rocket.Chat", "description": "Web Chat Server", "logo": "https://firebasestorage.googleapis.com/v0/b/webappstore-4c0a1.appspot.com/o/rocketchat.png?alt=media&token=3a6a6cce-2c90-4a02-ae92-01bdd508551a"}
+    ]
+
 
     return (
         <>
             <div className="p-4">
                 <Card>
                     <div className="grid">
-                        <div className="sm:col-12 md:col-6 text-center md:text-left align-items-center flex">
-                            <section>
-                                <div className="block text-6xl font-bold mb-1">Run your Apps on the Web</div>
-                                <div className="text-6xl text-primary font-bold mb-3">access them from any Device</div>
-                                <Link href="/store">
-                                    <Button icon="pi pi-shopping-cart" label="Visit the Store" type="button" className="p-button-raised" />
-                                </Link>
-                            </section>
+                        <div className="sm:col-12 md:col-6 align-items-center flex">
+                            <div className="text-center md:text-left text-6xl font-bold mb-1 line-height-2 md:pl-4">
+                                <div className="md:text-left">Run your Apps on the Web</div>
+                                <div className="md:text-left text-primary ">access them from any Device</div>
+                                <div className="md:text-left">
+                                    <Link href="/store">
+                                        <Button icon="pi pi-shopping-cart" label="Visit the Store" type="button" className="p-button-raised mr-3 p-button-info" />
+                                    </Link>
+                                    <Link href="/store">
+                                        <Button icon="pi pi-info-circle" label="Learn More" type="button" className="p-button-outlined p-button-info" />
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                        <div className="sm:col-12 md:col-6">
-                            <Image alt="hero" height="1600" width="2000" src='/hero.png' layout="intrinsic" style={{ paddingLeft: '2rem', paddingRight: '1rem', paddingTop: '2rem'}}/>
+                        <div className="flex">
+                            <Image className='pt-4 pl-1' alt="hero" height="500" width="600" src='/hero.png' layout="intrinsic" />
                         </div>
                     </div>
                 </Card>
@@ -29,55 +74,65 @@ export default function Home() {
                 <Card>
                     <div className="text-center">
                         <div className="mb-3 font-bold text-6xl">
-                            <span className="text-900">Benfits of </span>
-                            <span className="text-primary">WebApps</span>
+                            <span className="text-900">Benfits of the </span>
+                            <span className="text-primary">WebApp Store</span>
                         </div>
                         <div className="grid">
                             <div className="sm:col-12 md:col-6 lg:col-4 mb-4 px-5">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
-                                    <i className="pi pi-desktop text-4xl text-blue-500"></i>
+                                    <i className="pi pi-lock-open text-4xl text-blue-500"></i>
                                 </span>
-                                <div className="text-900 mb-3 font-medium">Built for Developers</div>
-                                <span className="text-700 text-sm line-height-3">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</span>
+                                <div className="text-900 mb-3 font-medium">Stop Platform Dependencies</div>
+                                <span className="text-700 text-sm line-height-3">WebApps can be used from every Device that has Internet Access</span>
                             </div>
                             <div className="sm:col-12 md:col-6 lg:col-4 mb-4 px-5">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-lock text-4xl text-blue-500"></i>
                                 </span>
                                 <div className="text-900 mb-3 font-medium">End-to-End Encryption</div>
-                                <span className="text-700 text-sm line-height-3">Risus nec feugiat in fermentum posuere urna nec. Posuere sollicitudin aliquam ultrices sagittis.</span>
+                                <span className="text-700 text-sm line-height-3">Every WebApp is secured by a trusted certificate and all treffic is encrypted</span>
                             </div>
                             <div className="sm:col-12 md:col-6 lg:col-4 mb-4 px-5">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-check-circle text-4xl text-blue-500"></i>
                                 </span>
                                 <div className="text-900 mb-3 font-medium">Easy to Use</div>
-                                <span className="text-700 text-sm line-height-3">Ornare suspendisse sed nisi lacus sed viverra tellus. Neque volutpat ac tincidunt vitae semper.</span>
+                                <span className="text-700 text-sm line-height-3">Installing a WebApp is as simple as installing a App on your Phone</span>
                             </div>
                             <div className="sm:col-12 md:col-6 lg:col-4 mb-4 px-5">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-globe text-4xl text-blue-500"></i>
                                 </span>
-                                <div className="text-900 mb-3 font-medium">Fast & Global Support</div>
-                                <span className="text-700 text-sm line-height-3">Fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus.</span>
+                                <div className="text-900 mb-3 font-medium">Fast & Global Accessibilty</div>
+                                <span className="text-700 text-sm line-height-3">Every WebApp is accessible from all around the world</span>
                             </div>
                             <div className="sm:col-12 md:col-6 lg:col-4 mb-4 px-5">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
-                                    <i className="pi pi-github text-4xl text-blue-500"></i>
+                                    <i className="pi pi-users text-4xl text-blue-500"></i>
                                 </span>
-                                <div className="text-900 mb-3 font-medium">Open Source</div>
-                                <span className="text-700 text-sm line-height-3">Nec tincidunt praesent semper feugiat. Sed adipiscing diam donec adipiscing tristique risus nec feugiat. </span>
+                                <div className="text-900 mb-3 font-medium">Collaborative</div>
+                                <span className="text-700 text-sm line-height-3">Use one App for your team, your family or your company</span>
                             </div>
                             <div className="sm:col-12 md:col-6 lg:col-4 md:mb-4 mb-0 px-3">
                                 <span className="p-3 shadow-8 mb-3 inline-block" style={{ borderRadius: '10px' }}>
                                     <i className="pi pi-shield text-4xl text-blue-500"></i>
                                 </span>
-                                <div className="text-900 mb-3 font-medium">Trusted Securitty</div>
-                                <span className="text-700 text-sm line-height-3">Mattis rhoncus urna neque viverra justo nec ultrices. Id cursus metus aliquam eleifend.</span>
+                                <div className="text-900 mb-3 font-medium">Trusted Security</div>
+                                <span className="text-700 text-sm line-height-3">All WebApps run in a secure datacenter in Germany</span>
                             </div>
                         </div>
                     </div>
-
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">Popular </span>
+                            <span className="text-primary">WebApps</span>
+                        </div>
+                    </div>
+                    <Carousel value={products} itemTemplate={productTemplate} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}></Carousel>
                 </Card>
             </div>
         </>

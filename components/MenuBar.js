@@ -29,7 +29,7 @@ export default function MenuBar() {
         }
     ];
 
-    const start = <Link href="/"><Image  alt="logo" src="/logo2.png" height="40" width="90"className="mr-3" ></Image></Link>;
+    const start = <Link href="/"><Image  alt="logo" src="/logo2.png" height="40" width="90"className="mr-3 cursor-pointer" ></Image></Link>;
     const end = <SignInOutButton/>
 
     return (
