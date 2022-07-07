@@ -150,10 +150,10 @@ export default function Home() {
                             <Image className=' pt-4 pl-1' alt="hero" height="800" width="920" src='/chat.png' layout="intrinsic" />
                         </div>
                         <div className="sm:col-12 md:col-5 align-items-center flex">
-                            <div className="text-center md:text-left md:pl-4">
+                            <div className="text-center md:text-left md:pl-4 ">
                                 <div className="font-bold line-height-2 md:text-left text-4xl ">Communication</div>
-                                <p className='md:text-left text-lg font-bold'>Use Rocket.Chat to let every Conversation flow</p>
-                                <p className='md:text-left text-lg'>Rocket.Chat is the world's largest open source communcation platform and a great alternative to Slack, because it not only provides a great UI, you can also integrate it in your own App.</p>
+                                <p className="md:text-left text-lg font-bold">Use Rocket.Chat to let every Conversation flow</p>
+                                <p className="md:text-left text-lg">Rocket.Chat is the world&apos;s largest open source communcation platform and a great alternative to Slack, because it not only provides a great UI, you can also integrate it in your own App.</p>
                             </div>
                         </div>
                     </div>
