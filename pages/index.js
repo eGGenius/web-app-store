@@ -134,11 +134,11 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="justify-content-center grid">
-                        <div className="sm:col-12 md:col-5 align-items-center text-center flex">
+                        <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
                             <div className="text-center md:text-left md:pl-4">
                                 <div className="font-bold line-height-2 md:text-left text-4xl ">Collaboration</div>
-                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
-                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
+                                <p className='md:text-left text-lg font-bold'>Use Nextcloud to manage Your Data</p>
+                                <p className='md:text-left text-lg'>Nextcloud delivers tight integration of chat, project management, email, calendar and more. Chat messages can be turned directly into tasks, task deadlines are visible in the calendar, and files can be attached to a task via the share dialog.</p>
                             </div>
                         </div>
                         <div className="sm:col-12 md:col-5 flex">
@@ -146,27 +146,27 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="justify-content-center grid">
-                        <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-2">
-                            <div className="text-center md:text-left md:pl-4">
-                                <div className="font-bold line-height-2 md:text-left text-4xl ">Online Calendar</div>
-                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
-                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
-                            </div>
+                        <div className="flex sm:col-12 md:col-5">
+                            <Image className=' pt-4 pl-1' alt="hero" height="800" width="920" src='/chat.png' layout="intrinsic" />
                         </div>
-                        <div className="flex sm:col-12 md:col-5 md:flex-order-1">
-                            <Image className=' pt-4 pl-1' alt="hero" height="800" width="920" src='/undraw_Online_calendar.png' layout="intrinsic" />
+                        <div className="sm:col-12 md:col-5 align-items-center flex">
+                            <div className="text-center md:text-left md:pl-4">
+                                <div className="font-bold line-height-2 md:text-left text-4xl ">Communication</div>
+                                <p className='md:text-left text-lg font-bold'>Use Rocket.Chat to let every Conversation flow</p>
+                                <p className='md:text-left text-lg'>Rocket.Chat is the world's largest open source communcation platform and a great alternative to Slack, because it not only provides a great UI, you can also integrate it in your own App.</p>
+                            </div>
                         </div>
                     </div>
                     <div className="justify-content-center grid">
-                        <div className="sm:col-12 md:col-5 align-items-center flex">
+                        <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
                             <div className="text-center md:text-left md:pl-4">
-                                <div className="font-bold line-height-2 md:text-left text-4xl ">Scrum Board</div>
-                                <p className='md:text-left text-lg'>Collaborate with as many users as you like</p>
-                                <p className='md:text-left text-lg'>Because everything is stored in one App everybody has the same state and you dont need to worry about syncing your changes as you go along in your project</p>
+                                <div className="font-bold line-height-2 md:text-left text-4xl ">Documentation</div>
+                                <p className='md:text-left text-lg font-bold'>Use Wiki.js to make documentation a joy</p>
+                                <p className='md:text-left text-lg'>Wiki.js is the most powerful and extensible open source Wiki software, that lets you write and customize your own Wiki</p>
                             </div>
                         </div>
                         <div className="sm:col-12 md:col-5 flex">
-                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/undraw_Scrum_board.png' layout="intrinsic" />
+                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/wiki.png' layout="intrinsic" />
                         </div>
                     </div>
                 </Card>
