@@ -39,7 +39,7 @@ export default function StoreDetailViewPage(props) {
     }
 
     const header =
-        <Image alt="Card" height="80" width="80" src={data.logo || '/images.png'} style={{ margin: '1rem' }} />;
+        <Image alt="Card" height="80" width="80" src={data.logo || '/images.png'}/>;
 
 
     return (
