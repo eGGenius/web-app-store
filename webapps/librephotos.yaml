@@ -1,0 +1,104 @@
+version: "3.8"
+services:
+  proxy:
+    image: reallibrephotos/librephotos-proxy:latest
+    container_name: proxy
+    restart: unless-stopped
+    volumes:
+      - scandirectory:/data
+      - protected_media:/protected_media
+    ports:
+      - :80
+    depends_on:
+      - backend
+      - frontend
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+
+  db:
+    image: postgres:13
+    container_name: db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=librephotos
+      - POSTGRES_PASSWORD=librephotos1862
+      - POSTGRES_DB=librephotos
+    volumes:
+      - db:/var/lib/postgresql/data
+    command: postgres -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c random_page_cost=1.0
+    #Checking health of Postgres db
+    healthcheck:
+      test: psql -U librephotos -d librephotos -c "SELECT 1;"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+  frontend:
+    image: reallibrephotos/librephotos-frontend:latest
+    container_name: frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+  backend:
+    image: reallibrephotos/librephotos:latest
+    container_name: backend
+    restart: unless-stopped
+    volumes:
+      - scandirectory:/data
+      - protected_media:/protected_media
+      - logs:/logs
+      - cache:/root/.cache
+
+    environment:
+#      - SECRET_KEY=${shhhhKey}
+      - BACKEND_HOST=backend
+#      - ADMIN_EMAIL=${adminEmail}
+#      - ADMIN_USERNAME=librephotos
+#      - ADMIN_PASSWORD=librephotos
+      - DB_BACKEND=postgresql
+      - DB_NAME=librephotos
+      - DB_USER=librephotos
+      - DB_PASS=librephotos1862
+      - DB_HOST=db
+      - DB_PORT=5432
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+#      - MAPBOX_API_KEY=${mapApiKey}
+#      - WEB_CONCURRENCY=${gunniWorkers}
+#      - SKIP_PATTERNS=${skipPatterns}
+      - ALLOW_UPLOAD=true
+      - DEBUG=0
+#      - HEAVYWEIGHT_PROCESS=${HEAVYWEIGHT_PROCESS}
+
+    # Wait for Postgres
+    depends_on:
+      - db
+          
+  redis:
+    image: redis:6
+    container_name: redis
+    restart: unless-stopped
+volumes:
+  scandirectory: null
+  protected_media: null
+  db: null
+  logs: null
+  cache: null
+  
+networks:
+  default:
+    external:
+      name: traefik-public
