@@ -21,13 +21,13 @@ export default function CreateAppForm({ }) {
                 </li>
                 <br />
                 <li>
-                    <h5>WebApp Description</h5>
-                    <p className="text-sm">one sentance that describes the WebApp</p>
+                    <h5>WebApp short Description</h5>
+                    <p className="text-sm">maximum 20 letters</p>
                 </li>
                 <br />
                 <li>
-                    <h5>Docker Command</h5>
-                    <p className="text-sm">Docker Command to run the WebApp (Compose will be supported soon)</p>
+                    <h5>Docker Compose File</h5>
+                    <p className="text-sm">Docker Compose file Version 3 or higher</p>
                 </li>
             </ul>
             <br />
