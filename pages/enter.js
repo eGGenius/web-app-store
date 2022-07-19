@@ -1,4 +1,4 @@
-import { auth, firestore, googleAuthProvider } from '../lib/firebase';
+import { auth, firestore, googleAuthProvider, githubAuthProvider } from '../lib/firebase';
 import { UserContext } from '../lib/context';
 
 import { useEffect, useState, useCallback, useContext } from 'react';
@@ -27,13 +27,21 @@ function SignInButton() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);
   };
+  const signInWithGitHub = async () => {
+    await auth.signInWithPopup(githubAuthProvider);
+  };
 
   return (
     <div className=" p-4">
       <Card>
-        <Button className="btn-google" onClick={signInWithGoogle}>
+        <Button onClick={signInWithGoogle} style={{ backgroundColor: '#fff', borderColor: '#fff' }}>
           <i className="pi pi-google px-2"></i> Sign in with Google
         </Button>
+        <p/>
+        <Button onClick={signInWithGitHub} style={{ backgroundColor: '#fff', borderColor: '#fff' }}>
+          <i className="pi pi-github px-2"></i> Sign in with GitHub
+        </Button>
+        <p/>
       </Card>
     </div>
   );

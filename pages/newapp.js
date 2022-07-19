@@ -14,7 +14,11 @@ export default function NewAppPage({ }) {
             <Card>
                 {user
                     ? <CreateAppForm/>
-                    : <SignInOutButton/>
+                    : 
+                    <>
+                        <h3>Sign in to create new WebApps</h3>
+                        <SignInOutButton />
+                    </>
                 }
             </Card>
         </div>

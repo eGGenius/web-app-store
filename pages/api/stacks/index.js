@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 }
 
 export async function createStack(name, body, apiKey, username) {
+    // TODO: erst abfragen wieviele WebApps der User schon betreibt, falls das mehr als 3 sind Error rückmelden
     const url = process.env.PORTAINER_API + 'stacks?type=1&method=string&endpointId=1';
     const detail = JSON.parse(body)
     const content = {

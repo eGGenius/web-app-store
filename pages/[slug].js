@@ -66,7 +66,11 @@ export default function StoreDetailViewPage(props) {
                                 <div className="field col">
                                     {username
                                         ? <Button label={data.status || "Install WebApp"} className="w-full" type="submit" loading={loading}  disabled={data.status === 'Coming Soon'} />
-                                        : <SignInOutButton />}
+                                        : 
+                                        <>
+                                            <SignInOutButton />
+                                            <p>Sign in to install WebApps</p>
+                                        </>}
                                 </div>
                             </div>
                             <div className="col-2 md:col-3"></div>
