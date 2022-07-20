@@ -22,9 +22,7 @@ export default function MyAppsPage() {
 
     const actionBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteStack(rowData, portainerApiKey) } />
-            </React.Fragment>
+            <Button label="Delete" icon="pi pi-trash" className="p-button-rounded p-button-danger" onClick={() => deleteStack(rowData, portainerApiKey)} />
         );
     }
     const useLinkBodyTemplate = (rowData) => {
@@ -34,15 +32,15 @@ export default function MyAppsPage() {
             let val = loadingValue;
             interval.current = setInterval(() => {
                 val += + 5;
-    
+
                 if (val >= 100) {
                     val = 100;
                     clearInterval(interval.current);
                 }
-    
+
                 setloadingValue(val);
             }, 1000);
-    
+
             return () => {
                 if (interval.current) {
                     clearInterval(interval.current);
@@ -52,7 +50,7 @@ export default function MyAppsPage() {
         }, []);
         if (Math.floor(Date.now() / 1000) > rowData.CreationDate + 21) {
             return (
-                <a href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} />{rowData.Name}.webapp-store.de</a>
+                <a style={{ textDecoration: 'none' }} href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} /> <Button tooltip={`https://${rowData.Name}.webapp-store.de`} label="Web UI" icon="pi pi-desktop" className="p-button-sm p-button-rounded p-button-primary "/> </a>
             )
         }
         else {
@@ -91,7 +89,7 @@ export default function MyAppsPage() {
                         <Column field="Created" header="Created" body={createdBodyTemplate} sortable></Column>
                         <Column body={actionBodyTemplate} ></Column>
                     </DataTable>
-                    : 
+                    :
                     <>
                         <h3>Sign in to use see your WebApps</h3>
                         <SignInOutButton />
