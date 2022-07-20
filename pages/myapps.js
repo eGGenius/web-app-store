@@ -50,7 +50,7 @@ export default function MyAppsPage() {
         }, []);
         if (Math.floor(Date.now() / 1000) > rowData.CreationDate + 21) {
             return (
-                <a style={{ textDecoration: 'none' }} href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} /> <Button tooltip={`https://${rowData.Name}.webapp-store.de`} label="Web UI" icon="pi pi-desktop" className="p-button-sm p-button-rounded p-button-primary "/> </a>
+                <a href={`https://${rowData.Name}.webapp-store.de`} target="_blank" rel="noopener noreferrer"><img src={rowData.Env[1].value} height="40px" style={{ marginRight: '1rem' }} />{rowData.Name}.webapp-store.de</a>
             )
         }
         else {
