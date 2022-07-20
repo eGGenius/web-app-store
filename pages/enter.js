@@ -22,7 +22,6 @@ export default function Enter(props) {
   );
 }
 
-// Sign in with Google Button
 function SignInButton() {
   const signInWithGoogle = async () => {
     await auth.signInWithPopup(googleAuthProvider);

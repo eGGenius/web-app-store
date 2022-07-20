@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { InputText } from 'primereact/inputtext';
 import { Card } from "primereact/card";
@@ -9,9 +9,11 @@ import { UserContext } from '../lib/context';
 import { useContext } from 'react';
 import { firestore } from '../lib/firebase';
 import Image from 'next/image';
+import { Toast } from 'primereact/toast';
 import ReactMarkdown from 'react-markdown'
 
 export default function StoreDetailViewPage(props) {
+    const toast = useRef(null);
     const { username, portainerApiKey } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
     const data = props.data
@@ -34,8 +36,14 @@ export default function StoreDetailViewPage(props) {
             headers: { "xapikey": portainerApiKey, "username": username, "name": name },
             body: JSON.stringify(content)
         })
-        setLoading(false);
-        router.push('/myapps');
+        if (res.status == 406) {
+            toast.current.show({severity: 'error', summary: 'Maximum of WebApps reached', detail: 'Delete a WebApp to install another one'});
+            setLoading(false);
+        }
+        else {
+            setLoading(false);
+            router.push('/myapps');
+        }
     }
 
     const header =
@@ -44,6 +52,7 @@ export default function StoreDetailViewPage(props) {
 
     return (
         <>
+            <Toast ref={toast} />
             <div className="p-4" style={{ 'textAlign': 'center' }}>
                 <Card title={data.title} subTitle={data.description} header={header} style={{ paddingTop: '1rem' }}>
                     <form onSubmit={createWebApp}>

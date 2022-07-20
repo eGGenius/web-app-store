@@ -1,13 +1,33 @@
 export default async function handler(req, res) {
     const apiKey = req.headers.xapikey
-    const stack = await createStack(req.headers.name, req.body, apiKey, req.headers.username)
-    res
-        .status(200)
-        .json(stack)
+    if (await countStacks(apiKey) >= 3){
+        res
+            .status(406)
+            .json('only 3 WebApps are allowed')
+    }
+    else {
+        const stack = await createStack(req.headers.name, req.body, apiKey, req.headers.username)
+        res
+            .status(200)
+            .json(stack)
+    }
+}
+
+export async function countStacks(apiKey) {
+    const url = process.env.PORTAINER_API + "stacks";
+    const res = await fetch(url, {
+        method: 'GET',
+        withCredentials: true,
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "x-api-key": apiKey
+        }
+    })
+    const stacks = await res.json()
+    return await stacks.length
 }
 
 export async function createStack(name, body, apiKey, username) {
-    // TODO: erst abfragen wieviele WebApps der User schon betreibt, falls das mehr als 3 sind Error rückmelden
     const url = process.env.PORTAINER_API + 'stacks?type=1&method=string&endpointId=1';
     const detail = JSON.parse(body)
     const content = {
