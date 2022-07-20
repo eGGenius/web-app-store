@@ -10,22 +10,15 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-import { Toast } from 'primereact/toast';
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 export default function MyAppsPage() {
     const { portainerApiKey } = useContext(UserContext);
-
-    //if (portainerApiKey){
     const url = '/api/myapps'
     const headerData = { headers: { "xapikey": portainerApiKey } }
     const { data, error } = useSWR([url, headerData], fetcher, { refreshInterval: 2000 })
-    const toast = useRef(null);
-    const showError = () => {
-        toast.current.show({ severity: 'error', summary: 'Deleted', detail: 'Web App was deleted', life: 3000 });
-    }
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -89,7 +82,6 @@ export default function MyAppsPage() {
     const header = renderHeader();
     return (
         <div className=" p-4">
-            <Toast ref={toast} />
             <Card>
                 {portainerApiKey
                     ? <DataTable value={data} responsiveLayout="stack" breakpoint="960px" header={header}>
