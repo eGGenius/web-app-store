@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 }
 
 export async function deleteStack(id, apiKey) {
-    const url = process.env.PORTAINER_API + 'stacks/' + id + '?endpointId=1';
+    const url = process.env.PORTAINER_API + 'stacks/' + id + '?endpointId=' + process.env.ENDPOINT_ID;
     const res = await fetch(url, {
         method: 'DELETE',
         withCredentials: true,
