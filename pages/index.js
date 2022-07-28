@@ -217,7 +217,7 @@ export default function Home() {
                         <div className="justify-content-center grid">
                             <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
                                 <div className="text-center md:text-left md:pl-4">
-                                    <div className="font-bold line-height-2 md:text-left text-4xl ">Hi I&aposm Jonathan,</div>
+                                    <div className="font-bold line-height-2 md:text-left text-4xl ">Hi I&apos;m Jonathan,</div>
                                     <p className='md:text-left text-xl font-bold'>I love to break IT stuff down and make it so simple that anyone can use it.</p>
                                     <p className='md:text-left text-lg'>The WebApp Store is a part of my master thesis in which I evaluate it.</p>
                                     <div className='flex justify-content-center'>
