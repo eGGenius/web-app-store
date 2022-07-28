@@ -3,8 +3,33 @@ import { Button } from 'primereact/button';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Carousel } from 'primereact/carousel';
+import { Timeline } from 'primereact/timeline';
 
 export default function Home() {
+    const steps = [
+        { status: 'Browse the Store and find an interesting WebApp', icon: 'pi pi-search', color: '#9E9E9E', subTitle: '', content: 'The Store offers a variety of popular open source WebApps. If you miss one, just head to the "New" menu and read the instructions on how to add a WebApp to the Store.'},
+        { status: 'Install it with one single Click', icon: 'pi pi-plus-circle', color: '#F97316', subTitle: '', content: 'All WebApps can be installed with a single click. Just give it a name and we will take care of the rest, so you dont need to bother about all the technical details.' },
+        { status: 'Share the Link with your friends', icon: 'pi pi-share-alt', color: '#22C55E', subTitle: '', content: 'After clicking "Install", you will be redirected to the "My WebApps" page where you can see all the WebApps you have installed. Simply copy the link to your new WebApp and share it with everyone you like.' },
+        { status: 'Enjoy using it', icon: 'pi pi-heart', color: '#A855F7', subTitle: '', content: 'That is all you need to get your new WebApp up and running. You can now use it for yourself, with friends and family, or within your business.' }
+    ];
+
+    const customizedMarker = (item) => {
+        return (
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color, width: '2rem', height:'2rem', alignItems:'center', justifyContent:'center', borderRadius:'50%', display:'flex' }}>
+                <i className={item.icon} ></i>
+            </span>
+        );
+    };
+
+    const customizedContent = (item) => {
+        return (
+            <Card title={item.status} className="shadow-none">
+                <p>{item.content}</p>
+            </Card>
+        );
+    };
+
+
     const responsiveOptions = [
         {
             breakpoint: '1024px',
@@ -50,11 +75,11 @@ export default function Home() {
             <div className="p-4">
                 <Card>
                     <div className="grid">
-                        <div className="sm:col-12 md:col-6 align-items-center flex">
+                        <div className="sm:col-12 md:col-6 align-items-center flex justify-content-center">
                             <div className="text-center md:text-left md:pl-4">
                                 <div className="font-bold line-height-2 md:text-left text-6xl ">Run your Apps on the Web</div>
                                 <div className="font-bold line-height-2 md:text-left text-primary text-6xl">access them from any Device</div>
-                                <p className='md:text-left mt-0 mb-4 text-700 line-height-3 mt-3'>run your Apps on the Web an make you independant from platform restrictions</p>
+                                <p className='md:text-left mt-0 mb-5 text-700 line-height-3 mt-3 h5'>run your Apps on the Web an make you independant from platform restrictions</p>
                                 <div className="md:text-left md:pt-4">
                                     <Link href="/store">
                                         <Button icon="pi pi-shopping-cart" label="Visit the Store" type="button" className="p-button-raised mr-3 p-button-info" />
@@ -65,7 +90,7 @@ export default function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div className="sm:col-12 md:col-6 align-items-center flex">
+                        <div className="sm:col-12 md:col-6 align-items-center flex grid">
                             <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/hero.png' layout="intrinsic" />
                         </div>
                     </div>
@@ -180,6 +205,46 @@ export default function Home() {
                         </div>
                     </div>
                     <Carousel value={products} itemTemplate={productTemplate} numVisible={3} numScroll={3} responsiveOptions={responsiveOptions}></Carousel>
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">About </span>
+                            <span className="text-primary">me</span>
+                        </div>
+                        <div className="justify-content-center grid">
+                            <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
+                                <div className="text-center md:text-left md:pl-4">
+                                    <div className="font-bold line-height-2 md:text-left text-4xl ">Hi I'm Jonathan,</div>
+                                    <p className='md:text-left text-xl font-bold'>I love to break IT stuff down and make it so simple that anyone can use it.</p>
+                                    <p className='md:text-left text-lg'>The WebApp Store is a part of my master thesis in which I evaluate it.</p>
+                                    <div className='flex justify-content-center'>
+                                        <a href={`mailto:contact@webapp-store.de`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none'}} >
+                                            <Button icon="pi pi-envelope" label="Get In Touch" type="button" className="p-button-raised" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="sm:col-12 md:col-5 flex">
+                                <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/coder.png' layout="intrinsic" />
+                            </div>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">How it </span>
+                            <span className="text-primary">works</span>
+                        </div>
+                        <div className="timeline-demo">
+                            <Timeline value={steps} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} style={{alignItems: 'left' }}/>
+                        </div>
+                    </div>
                 </Card>
             </div>
             <div className="p-4">
