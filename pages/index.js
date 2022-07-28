@@ -7,9 +7,9 @@ import { Timeline } from 'primereact/timeline';
 
 export default function Home() {
     const steps = [
-        { status: 'Browse the Store and find an interesting WebApp', icon: 'pi pi-search', color: '#9E9E9E', subTitle: '', content: 'The Store offers a variety of popular open source WebApps. If you miss one, just head to the "New" menu and read the instructions on how to add a WebApp to the Store.'},
+        { status: 'Browse the Store and find an interesting WebApp', icon: 'pi pi-search', color: '#9E9E9E', subTitle: '', content: 'The Store offers a variety of popular open source WebApps. If you miss one, just head to the New menu and read the instructions on how to add a WebApp to the Store.'},
         { status: 'Install it with one single Click', icon: 'pi pi-plus-circle', color: '#F97316', subTitle: '', content: 'All WebApps can be installed with a single click. Just give it a name and we will take care of the rest, so you dont need to bother about all the technical details.' },
-        { status: 'Share the Link with your friends', icon: 'pi pi-share-alt', color: '#22C55E', subTitle: '', content: 'After clicking "Install", you will be redirected to the "My WebApps" page where you can see all the WebApps you have installed. Simply copy the link to your new WebApp and share it with everyone you like.' },
+        { status: 'Share the Link with your friends', icon: 'pi pi-share-alt', color: '#22C55E', subTitle: '', content: 'After clicking Install, you will be redirected to the My WebApps page where you can see all the WebApps you have installed. Simply copy the link to your new WebApp and share it with everyone you like.' },
         { status: 'Enjoy using it', icon: 'pi pi-heart', color: '#A855F7', subTitle: '', content: 'That is all you need to get your new WebApp up and running. You can now use it for yourself, with friends and family, or within your business.' }
     ];
 
