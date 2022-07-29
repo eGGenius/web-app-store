@@ -5,6 +5,7 @@ import { useUserData } from '../lib/hooks';
 
 import Head from 'next/head';
 import MenuBar from '../components/MenuBar';
+import { ScrollTop } from 'primereact/scrolltop';
 
 import "primereact/resources/themes/vela-blue/theme.css";  //theme
 import "primereact/resources/primereact.min.css";                  //core css
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <MenuBar />
       <Component {...pageProps} />
+      <ScrollTop threshold={200} behavior="smooth" />
     </UserContext.Provider>
   );
 }
