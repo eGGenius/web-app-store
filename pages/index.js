@@ -7,7 +7,7 @@ import { Timeline } from 'primereact/timeline';
 
 export default function Home() {
     const steps = [
-        { status: 'Browse the Store and find an interesting WebApp', icon: 'pi pi-search', color: '#9E9E9E', subTitle: '', content: 'The Store offers a variety of popular open source WebApps. If you miss one, just head to the New menu and read the instructions on how to add a WebApp to the Store.'},
+        { status: 'Browse the Store and find an interesting WebApp', icon: 'pi pi-search', color: '#9E9E9E', subTitle: '', content: 'The Store offers a variety of popular open source WebApps. If you miss one, just head to the New menu and read the instructions on how to add a WebApp to the Store.' },
         { status: 'Install it with one single Click', icon: 'pi pi-plus-circle', color: '#F97316', subTitle: '', content: 'All WebApps can be installed with a single click. Just give it a name and we will take care of the rest, so you dont need to bother about all the technical details.' },
         { status: 'Share the Link with your friends', icon: 'pi pi-share-alt', color: '#22C55E', subTitle: '', content: 'After clicking Install, you will be redirected to the My WebApps page where you can see all the WebApps you have installed. Simply copy the link to your new WebApp and share it with everyone you like.' },
         { status: 'Enjoy using it', icon: 'pi pi-heart', color: '#A855F7', subTitle: '', content: 'That is all you need to get your new WebApp up and running. You can now use it for yourself, with friends and family, or within your business.' }
@@ -15,7 +15,7 @@ export default function Home() {
 
     const customizedMarker = (item) => {
         return (
-            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color, width: '2rem', height:'2rem', alignItems:'center', justifyContent:'center', borderRadius:'50%', display:'flex' }}>
+            <span className="custom-marker shadow-1" style={{ backgroundColor: item.color, width: '2rem', height: '2rem', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', display: 'flex' }}>
                 <i className={item.icon} ></i>
             </span>
         );
@@ -91,7 +91,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="sm:col-12 md:col-6 align-items-center flex grid">
-                            <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/hero.png' layout="intrinsic" />
+                            <Image className='pt-4 pl-1' alt="hero" height="600" width="800" src='/hero.png' layout="intrinsic" />
                         </div>
                     </div>
                 </Card>
@@ -146,6 +146,29 @@ export default function Home() {
                                 <div className="text-900 mb-3 font-medium">Trusted Security</div>
                                 <span className="text-700 text-sm line-height-3">All WebApps run in a secure datacenter in Germany</span>
                             </div>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">What is </span>
+                            <span className="text-primary">a WebApp</span>
+                        </div>
+                        <div className="justify-content-center grid">
+                            <div className="sm:col-12 md:col-5 flex">
+                                <Image className='pt-' alt="hero" height="600" width="600" src='/server.png' layout="intrinsic" />
+                            </div>
+                            <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
+                            <div className="text-center md:text-left md:pl-4">
+                                <p className='md:text-left text-xl font-bold'>A WebApp is like a mobile app, it only runs in the browser</p>
+                                <p className='md:text-left text-lg'>Thus, WebApps can be accessed from any Internet-enabled device via a link. This link points to your own app instance running in a server cluster in Düsseldorf (Germany.)</p>
+                                <p className='md:text-left text-lg'>Since each WebApp runs as its own instance, you have full control over your WebApp and the data you store in it.</p>
+                                <p className='md:text-left text-lg'>But you don't have to worry about these technical backgrounds, we take care of everything so that you can use your WebApp with pleasure.</p>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </Card>
@@ -221,7 +244,7 @@ export default function Home() {
                                     <p className='md:text-left text-xl font-bold'>I love to break IT stuff down and make it so simple that anyone can use it.</p>
                                     <p className='md:text-left text-lg'>The WebApp Store is a part of my master thesis in which I evaluate it.</p>
                                     <div className='flex justify-content-center'>
-                                        <a href={`mailto:contact@webapp-store.de`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none'}} >
+                                        <a href={`mailto:contact@webapp-store.de`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
                                             <Button icon="pi pi-envelope" label="Get In Touch" type="button" className="p-button-raised" />
                                         </a>
                                     </div>
@@ -242,7 +265,7 @@ export default function Home() {
                             <span className="text-primary">works</span>
                         </div>
                         <div className="timeline-demo">
-                            <Timeline value={steps} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} style={{alignItems: 'left' }}/>
+                            <Timeline value={steps} align="alternate" className="customized-timeline" marker={customizedMarker} content={customizedContent} style={{ alignItems: 'left' }} />
                         </div>
                     </div>
                 </Card>
