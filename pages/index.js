@@ -163,7 +163,7 @@ export default function Home() {
                             </div>
                             <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
                             <div className="text-center md:text-left md:pl-4">
-                                <p className='md:text-left text-xl font-bold'>A WebApp is like a mobile app, it only runs in the browser</p>
+                                <p className='md:text-left text-xl font-bold'>A WebApp is like a Mobile App, it only runs in the browser</p>
                                 <p className='md:text-left text-lg'>Thus, WebApps can be accessed from any Internet-enabled device via a link. This link points to your own app instance running in a server cluster in Düsseldorf (Germany.)</p>
                                 <p className='md:text-left text-lg'>Since each WebApp runs as its own instance, you have full control over your WebApp and the data you store in it.</p>
                                 <p className='md:text-left text-lg'>But you don&apos;t have to worry about these technical backgrounds, we take care of everything so that you can use your WebApp with pleasure.</p>
