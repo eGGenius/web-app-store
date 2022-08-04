@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Carousel } from 'primereact/carousel';
 import { Timeline } from 'primereact/timeline';
+import { Chip } from 'primereact/chip';
 
 export default function Home() {
     const steps = [
@@ -234,33 +235,6 @@ export default function Home() {
                 <Card>
                     <div className="text-center">
                         <div className="mb-3 font-bold text-6xl">
-                            <span className="text-900">About </span>
-                            <span className="text-primary">me</span>
-                        </div>
-                        <div className="justify-content-center grid">
-                            <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
-                                <div className="text-center md:text-left md:pl-4">
-                                    <div className="font-bold line-height-2 md:text-left text-4xl ">Hi I&apos;m Jonathan,</div>
-                                    <p className='md:text-left text-xl font-bold'>I love to break IT stuff down and make it so simple that anyone can use it.</p>
-                                    <p className='md:text-left text-lg'>The WebApp Store is a part of my master thesis in which I evaluate it.</p>
-                                    <div className='flex justify-content-center'>
-                                        <a href={`mailto:contact@webapp-store.de`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
-                                            <Button icon="pi pi-envelope" label="Get In Touch" type="button" className="p-button-raised" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="sm:col-12 md:col-5 flex">
-                                <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/coder.png' layout="intrinsic" />
-                            </div>
-                        </div>
-                    </div>
-                </Card>
-            </div>
-            <div className="p-4">
-                <Card>
-                    <div className="text-center">
-                        <div className="mb-3 font-bold text-6xl">
                             <span className="text-900">How it </span>
                             <span className="text-primary">works</span>
                         </div>
@@ -281,6 +255,44 @@ export default function Home() {
                         <Link href="/store">
                             <Button icon="pi pi-shopping-cart" label="Visit the Store" type="button" className="p-button-raised mr-3 p-button-info p-button-lg" />
                         </Link>
+                    </div>
+                </Card>
+            </div>
+            <div className="p-4">
+                <Card>
+                    <div className="text-center">
+                        <div className="mb-3 font-bold text-6xl">
+                            <span className="text-900">About </span>
+                            <span className="text-primary">me</span>
+                        </div>
+                        <div className="justify-content-center grid">
+                            <div className="sm:col-12 md:col-5 align-items-center flex md:flex-order-0 flex-order-1">
+                                <div className="text-center md:text-left md:pl-4">
+                                    <div className="font-bold line-height-2 md:text-left text-4xl ">Hi I&apos;m Jonathan,</div>
+                                    <p className='md:text-left text-xl font-bold'>I love to break IT stuff down and make it so simple that anyone can use it.</p>
+                                    <p className='md:text-left text-lg'>The WebApp Store is a part of my master thesis in which I evaluate it.</p>
+                                    <div className="align-items-center mt-4">
+                                        <a href={`https://www.linkedin.com/in/jonathan-maier-014a27246/`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
+                                            <Chip label="LinkedIn" icon="pi pi-linkedin" className="m-2 mb-4" />
+                                        </a>
+                                        <a href={`https://www.reddit.com/user/WebApp-Store`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
+                                            <Chip label="Reddit" icon="pi pi-reddit" className="m-2 mb-4" />
+                                        </a>
+                                        <a href={`https://github.com/eGGenius`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
+                                            <Chip label="GitHub" icon="pi pi-github" className="m-2 mb-4" />
+                                        </a>
+                                    </div>
+                                    <div className='flex justify-content-center'>
+                                        <a href={`mailto:contact@webapp-store.de`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }} >
+                                            <Button icon="pi pi-envelope" label="Get In Touch" type="button" className="p-button-raised" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="sm:col-12 md:col-5 flex">
+                                <Image className='pt-4 pl-1' alt="hero" height="800" width="920" src='/coder.png' layout="intrinsic" />
+                            </div>
+                        </div>
                     </div>
                 </Card>
             </div>
