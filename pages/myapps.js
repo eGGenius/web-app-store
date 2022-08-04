@@ -91,7 +91,7 @@ export default function MyAppsPage() {
                     </DataTable>
                     :
                     <>
-                        <h3>Sign in to use see your WebApps</h3>
+                        <h3>Sign in to see your WebApps</h3>
                         <SignInOutButton />
                     </>
                 }
