@@ -16,6 +16,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import '../styles/globals.css'
 
+import Script from 'next/script'
+
 function MyApp({ Component, pageProps }) {
   const userData = useUserData();
   return (
@@ -31,6 +33,15 @@ function MyApp({ Component, pageProps }) {
       <MenuBar />
       <Component {...pageProps} />
       <ScrollTop threshold={200} behavior="smooth" />
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-CL1EKG60G4" strategy="afterInteractive"/>
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CL1EKG60G4');
+        `}
+      </Script>
     </UserContext.Provider>
   );
 }
