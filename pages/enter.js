@@ -1,6 +1,8 @@
 import { auth, firestore, googleAuthProvider, githubAuthProvider } from '../lib/firebase';
 import { UserContext } from '../lib/context';
 
+import { useRouter } from 'next/router';
+
 import { useEffect, useState, useCallback, useContext } from 'react';
 import Link from 'next/link';
 import debounce from 'debounce';
@@ -48,6 +50,8 @@ function SignInButton() {
 
 // Sign out Button
 function SignOutButton() {
+  const router = useRouter();
+  router.push('/store')
   return <div className=" p-4">
     <Card>
       <Link href='/store'>

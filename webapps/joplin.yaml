@@ -1,0 +1,51 @@
+version: '3'
+services:
+    db:
+        image: postgres:13
+        volumes:
+            - db:/var/lib/postgresql/data
+        ports:
+            - ":5432"
+        restart: unless-stopped
+        environment:
+            - POSTGRES_PASSWORD=$webappname$5wzH53IRBSr
+            - POSTGRES_USER=joplin
+            - POSTGRES_DB=joplin
+    app:
+        image: joplin/server:latest
+        depends_on:
+            - db
+        ports:
+            - ":22300"
+        restart: unless-stopped
+        environment:
+            - APP_PORT=22300
+            - APP_BASE_URL=https://$webappname$.webapp-store.de
+            - DB_CLIENT=pg
+            - POSTGRES_PASSWORD=$webappname$5wzH53IRBSr
+            - POSTGRES_DATABASE=postgres
+            - POSTGRES_USER=joplin
+            - POSTGRES_PORT=5432
+            - POSTGRES_HOST=db
+        deploy:
+          labels:
+            traefik.constraint-label: traefik-public
+            traefik.docker.network: traefik-public
+            traefik.enable: 'true'
+            traefik.http.routers.$webappname$.entrypoints: https
+            traefik.http.routers.$webappname$-http.entrypoints: http
+            traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$-http.middlewares: https-redirect
+            traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$.service: $webappname$
+            traefik.http.routers.$webappname$.tls: 'true'
+            traefik.http.routers.$webappname$.tls.certresolver: le
+            traefik.http.services.$webappname$.loadbalancer.server.port: 22300
+
+volumes:
+  db: null
+
+networks:
+  default:
+    external:
+      name: traefik-public
