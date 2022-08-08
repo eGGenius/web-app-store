@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  filebrowser:
+    image: hurlenko/filebrowser
+    user: "${UID}:${GID}"
+    ports:
+      - :8080
+    volumes:
+      - data:/data
+      - config:/config
+    environment:
+      - FB_BASEURL=/filebrowser
+    restart: always
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 8080
+volumes:
+  data: null
+  config: null
+
+networks:
+  default:
+    external:
+      name: traefik-public

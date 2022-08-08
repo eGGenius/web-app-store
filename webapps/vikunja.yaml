@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  api:
+    image: vikunja/api
+    environment:
+      VIKUNJA_DATABASE_HOST: db
+      VIKUNJA_DATABASE_PASSWORD: 4582uhrwuhv$webappname$o24tu
+      VIKUNJA_DATABASE_TYPE: mysql
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_SERVICE_JWTSECRET: 5z2ugrih2hi584grwiofksbn
+      VIKUNJA_SERVICE_FRONTENDURL: https://4582uhrwuhv$webappname$o24tu/
+    volumes: 
+      - files:/app/vikunja/files
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - :3456
+    deploy:
+      labels:
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$-api.rule: 'Host(`$webappname$.webapp-store.de`) && PathPrefix(`/api/v1`, `/dav/`, `/.well-known/`)'
+        traefik.http.routers.$webappname$-api.entrypoints: https
+        traefik.http.routers.$webappname$-api.tls.certResolver: le
+        traefik.http.routers.$webappname$-api.service: $webappname$-api
+        traefik.http.services.$webappname$-api.loadbalancer.server.port: 3456
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.http.routers.$webappname$-api.tls: 'true'
+  frontend:
+    image: vikunja/frontend
+    restart: unless-stopped
+    ports:
+      - :80
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+  db:
+    image: mariadb:10
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: rhq542h2th4582uhrwuhv$webappname$o24tu425h5g2r 
+      MYSQL_USER: vikunja
+      MYSQL_PASSWORD: 4582uhrwuhv$webappname$o24tu
+      MYSQL_DATABASE: vikunja
+    volumes:
+      - db:/var/lib/mysql
+    restart: unless-stopped
+volumes:
+  files: null
+  db: null
+networks:
+  default:
+    external:
+      name: traefik-public

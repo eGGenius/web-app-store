@@ -295,6 +295,11 @@ export default function Home() {
                         </div>
                     </div>
                 </Card>
+                <div className='flex justify-content-center'>
+                    <Link href="/privacy-en">
+                        <Button label="Privacy Policy" className="p-button-link mt-4" />
+                    </Link>
+                </div>
             </div>
         </>
     );
