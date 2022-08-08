@@ -14,57 +14,57 @@ export default function Privacy() {
             <h1>Datenschutzerklärung</h1>
             <h2 id="m1870">Einleitung</h2>
             <p>Mit der folgenden Datenschutzerklärung möchten wir Sie darüber aufklären,
-                welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als "Daten“
+                welche Arten Ihrer personenbezogenen Daten (nachfolgend auch kurz als &quot;Daten&quot;
                 bezeichnet) wir zu welchen Zwecken und in welchem Umfang im Rahmen der
                 Bereitstellung unserer Applikation verarbeiten.</p>
             <p>Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
             <p>Stand: 8. August 2022</p>
             <h2>Inhaltsübersicht</h2>
-            <ul class="index">
+            <ul className='index'>
                 <li>
-                    <a class="index-link" href="#m1870">Einleitung</a>
+                    <a className='index-link' href="#m1870">Einleitung</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m3">Verantwortlicher</a>
+                    <a className='index-link' href="#m3">Verantwortlicher</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#mOverview">Übersicht der Verarbeitungen</a>
+                    <a className='index-link' href="#mOverview">Übersicht der Verarbeitungen</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m13">Maßgebliche Rechtsgrundlagen</a>
+                    <a className='index-link' href="#m13">Maßgebliche Rechtsgrundlagen</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m27">Sicherheitsmaßnahmen</a>
+                    <a className='index-link' href="#m27">Sicherheitsmaßnahmen</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m25">Übermittlung von personenbezogenen Daten</a>
+                    <a className='index-link' href="#m25">Übermittlung von personenbezogenen Daten</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m24">Datenverarbeitung in Drittländern</a>
+                    <a className='index-link' href="#m24">Datenverarbeitung in Drittländern</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m134">Einsatz von Cookies</a>
+                    <a className='index-link' href="#m134">Einsatz von Cookies</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m225">Bereitstellung des Onlineangebotes und Webhosting</a>
+                    <a className='index-link' href="#m225">Bereitstellung des Onlineangebotes und Webhosting</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m367">Registrierung, Anmeldung und Nutzerkonto</a>
+                    <a className='index-link' href="#m367">Registrierung, Anmeldung und Nutzerkonto</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m182">Kontakt- und Anfragenverwaltung</a>
+                    <a className='index-link' href="#m182">Kontakt- und Anfragenverwaltung</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m17">Newsletter und elektronische Benachrichtigungen</a>
+                    <a className='index-link' href="#m17">Newsletter und elektronische Benachrichtigungen</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m638">Werbliche Kommunikation via E-Mail, Post, Fax oder Telefon</a>
+                    <a className='index-link' href="#m638">Werbliche Kommunikation via E-Mail, Post, Fax oder Telefon</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m263">Webanalyse, Monitoring und Optimierung</a>
+                    <a className='index-link' href="#m263">Webanalyse, Monitoring und Optimierung</a>
                 </li>
                 <li>
-                    <a class="index-link" href="#m136">Präsenzen in sozialen Netzwerken (Social Media)</a>
+                    <a className='index-link' href="#m136">Präsenzen in sozialen Netzwerken (Social Media)</a>
                 </li>
             </ul>
             <h2 id="m3">Verantwortlicher</h2>
@@ -188,7 +188,7 @@ export default function Privacy() {
                 EU-Kommission:
                 <a
                     href="https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de"
-                    target="_blank">https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de</a>).</p>
+                    >https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection_de</a>).</p>
             <h2 id="m134">Einsatz von Cookies</h2>
             <p>Cookies sind kleine Textdateien, bzw. sonstige Speichervermerke, die
                 Informationen auf Endgeräten speichern und Informationen aus den Endgeräten
@@ -255,14 +255,14 @@ export default function Privacy() {
                 der Verwendung von Cookies (wobei dadurch auch die Funktionalität unserer
                 Online-Dienste eingeschränkt sein kann). Ein Widerspruch gegen die Verwendung
                 von Cookies zu Online-Marketing-Zwecken kann auch über die Websites
-                <a href="https://optout.aboutads.info" target="_blank">https://optout.aboutads.info</a>
+                <a href="https://optout.aboutads.info" >https://optout.aboutads.info</a>
                 und
-                <a href="https://www.youronlinechoices.com/" target="_blank">https://www.youronlinechoices.com/</a>
+                <a href="https://www.youronlinechoices.com/" >https://www.youronlinechoices.com/</a>
                 erklärt werden.</p>
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitung von Cookie-Daten auf Grundlage einer Einwilligung:
                     </strong>Wir setzen ein Verfahren zum Cookie-Einwilligungs-Management ein, in
@@ -287,7 +287,7 @@ export default function Privacy() {
                 Verfügung stellen zu können. Zu diesem Zweck verarbeiten wir die IP-Adresse des
                 Nutzers, die notwendig ist, um die Inhalte und Funktionen unserer Online-Dienste
                 an den Browser oder das Endgerät der Nutzer zu übermitteln.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten);
@@ -308,12 +308,12 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Bereitstellung Onlineangebot auf gemietetem Speicherplatz:
                     </strong>Für die Bereitstellung unseres Onlineangebotes nutzen wir
                     Speicherplatz, Rechenkapazität und Software, die wir von einem entsprechenden
-                    Serveranbieter (auch "Webhoster" genannt) mieten oder anderweitig beziehen;
+                    Serveranbieter (auch &quot;Webhoster&quot; genannt) mieten oder anderweitig beziehen;
                     <strong>Rechtsgrundlagen:</strong>
                     Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO).</li>
                 <li>
@@ -326,7 +326,7 @@ export default function Privacy() {
                 <li>
                     <strong>Erhebung von Zugriffsdaten und Logfiles:
                     </strong>Der Zugriff auf unser Onlineangebot wird in Form von so genannten
-                    "Server-Logfiles" protokolliert. Zu den Serverlogfiles können die Adresse und
+                    &quot;Server-Logfiles&quot; protokolliert. Zu den Serverlogfiles können die Adresse und
                     Name der abgerufenen Webseiten und Dateien, Datum und Uhrzeit des Abrufs,
                     übertragene Datenmengen, Meldung über erfolgreichen Abruf, Browsertyp nebst
                     Version, das Betriebssystem des Nutzers, Referrer URL (die zuvor besuchte Seite)
@@ -358,7 +358,7 @@ export default function Privacy() {
                 Ansprüche erforderlich oder es besteht eine gesetzliche Verpflichtung hierzu.</p>
             <p>Die Nutzer können über Vorgänge, die für deren Nutzerkonto relevant sind, wie
                 z.B. technische Änderungen, per E-Mail informiert werden.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Bestandsdaten (z.B. Namen, Adressen); Kontaktdaten (z.B. E-Mail,
@@ -380,7 +380,7 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Registrierung mit Pseudonymen:
                     </strong>Nutzer dürfen statt Klarnamen Pseudonyme als Nutzernamen verwenden;
@@ -416,7 +416,7 @@ export default function Privacy() {
                 (vor)vertraglichen Anfragen und im Übrigen auf Grundlage der berechtigten
                 Interessen an der Beantwortung der Anfragen und Pflege von Nutzer- bzw.
                 Geschäftsbeziehungen.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Kontaktdaten (z.B. E-Mail, Telefonnummern); Inhaltsdaten (z.B. Eingaben in
@@ -440,7 +440,7 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Kontaktformular:
                     </strong>Wenn Nutzer über unser Kontaktformular, E-Mail oder andere
@@ -457,7 +457,7 @@ export default function Privacy() {
             </ul>
             <h2 id="m17">Newsletter und elektronische Benachrichtigungen</h2>
             <p>Wir versenden Newsletter, E-Mails und weitere elektronische
-                Benachrichtigungen (nachfolgend "Newsletter“) nur mit der Einwilligung der
+                Benachrichtigungen (nachfolgend &quot;Newsletter&quot;) nur mit der Einwilligung der
                 Empfänger oder einer gesetzlichen Erlaubnis. Sofern im Rahmen einer Anmeldung
                 zum Newsletter dessen Inhalte konkret umschrieben werden, sind sie für die
                 Einwilligung der Nutzer maßgeblich. Im Übrigen enthalten unsere Newsletter
@@ -488,7 +488,7 @@ export default function Privacy() {
                 ehemalige Bestehen einer Einwilligung bestätigt wird. Im Fall von Pflichten zur
                 dauerhaften Beachtung von Widersprüchen behalten wir uns die Speicherung der
                 E-Mail-Adresse alleine zu diesem Zweck in einer Sperrliste (sogenannte
-                "Blocklist") vor.</p>
+                &quot;Blocklist&quot;) vor.</p>
             <p>Die Protokollierung des Anmeldeverfahrens erfolgt auf Grundlage unserer
                 berechtigten Interessen zu Zwecken des Nachweises seines ordnungsgemäßen
                 Ablaufs. Soweit wir einen Dienstleister mit dem Versand von E-Mails beauftragen,
@@ -496,7 +496,7 @@ export default function Privacy() {
                 und sicheren Versandsystem.</p>
             <strong>Inhalte:</strong>
             <p>Informationen zu uns, unseren Leistungen, Aktionen und Angeboten.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Bestandsdaten (z.B. Namen, Adressen); Kontaktdaten (z.B. E-Mail,
@@ -524,10 +524,10 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Messung von Öffnungs- und Klickraten:
-                    </strong>Die Newsletter enthalten einen sogenannte "web-beacon“, d.h., eine
+                    </strong>Die Newsletter enthalten einen sogenannte &quot;web-beacon&quot;, d.h., eine
                     pixelgroße Datei, die beim Öffnen des Newsletters von unserem Server, bzw.,
                     sofern wir einen Versanddienstleister einsetzen, von dessen Server abgerufen
                     wird. Im Rahmen dieses Abrufs werden zunächst technische Informationen, wie
@@ -547,11 +547,11 @@ export default function Privacy() {
                     <strong>Rechtsgrundlagen:</strong>
                     Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);
                     <strong>Website:</strong>
-                    <a href="https://mailchimp.com" target="_blank">https://mailchimp.com</a>;
+                    <a href="https://mailchimp.com" >https://mailchimp.com</a>;
                     <strong>Datenschutzerklärung:</strong>
-                    <a href="https://mailchimp.com/legal/" target="_blank">https://mailchimp.com/legal/</a>;
+                    <a href="https://mailchimp.com/legal/" >https://mailchimp.com/legal/</a>;
                     <strong>Auftragsverarbeitungsvertrag:</strong>
-                    <a href="https://mailchimp.com/legal/" target="_blank">https://mailchimp.com/legal/</a>;
+                    <a href="https://mailchimp.com/legal/" >https://mailchimp.com/legal/</a>;
                     <strong>Standardvertragsklauseln (Gewährleistung Datenschutzniveau bei
                         Verarbeitung in Drittländern):</strong>
                     Einbeziehung im Auftragsverarbeitungsvertrag;
@@ -559,7 +559,7 @@ export default function Privacy() {
                     Besondere Sicherheitsmaßnahmen:
                     <a
                         href="https://mailchimp.com/help/Mailchimp-european-data-transfers/"
-                        target="_blank">https://mailchimp.com/help/Mailchimp-european-data-transfers/</a>.</li>
+                        >https://mailchimp.com/help/Mailchimp-european-data-transfers/</a>.</li>
             </ul>
             <h2 id="m638">Werbliche Kommunikation via E-Mail, Post, Fax oder Telefon</h2>
             <p>Wir verarbeiten personenbezogene Daten zu Zwecken der werblichen
@@ -576,7 +576,7 @@ export default function Privacy() {
                 beachten, speichern wir ferner die zur Vermeidung einer erneuten Kontaktaufnahme
                 erforderlichen Daten (z.B. je nach Kommunikationskanal die E-Mail-Adresse,
                 Telefonnummer, Name).</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Bestandsdaten (z.B. Namen, Adressen); Kontaktdaten (z.B. E-Mail,
@@ -593,7 +593,7 @@ export default function Privacy() {
                     Abs. 1 S. 1 lit. f) DSGVO).</li>
             </ul>
             <h2 id="m263">Webanalyse, Monitoring und Optimierung</h2>
-            <p>Die Webanalyse (auch als "Reichweitenmessung" bezeichnet) dient der
+            <p>Die Webanalyse (auch als &quot;Reichweitenmessung&quot; bezeichnet) dient der
                 Auswertung der Besucherströme unseres Onlineangebotes und kann Verhalten,
                 Interessen oder demographische Informationen zu den Besuchern, wie z.B. das
                 Alter oder das Geschlecht, als pseudonyme Werte umfassen. Mit Hilfe der
@@ -622,7 +622,7 @@ export default function Privacy() {
                 die Anbieter der eingesetzten Software kennen nicht die tatsächliche Identität
                 der Nutzer, sondern nur den für Zwecke der jeweiligen Verfahren in deren
                 Profilen gespeicherten Angaben.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Nutzungsdaten (z.B. besuchte Webseiten, Interesse an Inhalten, Zugriffszeiten);
@@ -647,7 +647,7 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Google Analytics:
                     </strong>Webanalyse, Reichweitenmessung sowie Messung von Nutzerströmen;
@@ -660,20 +660,20 @@ export default function Privacy() {
                     <strong>Website:</strong>
                     <a
                         href="https://marketingplatform.google.com/intl/de/about/analytics/"
-                        target="_blank">https://marketingplatform.google.com/intl/de/about/analytics/</a>;
+                        >https://marketingplatform.google.com/intl/de/about/analytics/</a>;
                     <strong>Datenschutzerklärung:</strong>
-                    <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>;
+                    <a href="https://policies.google.com/privacy" >https://policies.google.com/privacy</a>;
                     <strong>Auftragsverarbeitungsvertrag:</strong>
-                    <a href="https://business.safety.google/adsprocessorterms" target="_blank">https://business.safety.google/adsprocessorterms</a>;
+                    <a href="https://business.safety.google/adsprocessorterms" >https://business.safety.google/adsprocessorterms</a>;
                     <strong>Standardvertragsklauseln (Gewährleistung Datenschutzniveau bei
                         Verarbeitung in Drittländern):</strong>
-                    <a href="https://business.safety.google/adsprocessorterms" target="_blank">https://business.safety.google/adsprocessorterms</a>;
+                    <a href="https://business.safety.google/adsprocessorterms" >https://business.safety.google/adsprocessorterms</a>;
                     <strong>Widerspruchsmöglichkeit (Opt-Out):</strong>
                     Opt-Out-Plugin:
-                    <a href="https://tools.google.com/dlpage/gaoptout?hl=de" target="_blank">https://tools.google.com/dlpage/gaoptout?hl=de</a>, Einstellungen für die Darstellung von Werbeeinblendungen:
-                    <a href="https://adssettings.google.com/authenticated" target="_blank">https://adssettings.google.com/authenticated</a>;
+                    <a href="https://tools.google.com/dlpage/gaoptout?hl=de" >https://tools.google.com/dlpage/gaoptout?hl=de</a>, Einstellungen für die Darstellung von Werbeeinblendungen:
+                    <a href="https://adssettings.google.com/authenticated" >https://adssettings.google.com/authenticated</a>;
                     <strong>Weitere Informationen:</strong>
-                    <a href="https://privacy.google.com/businesses/adsservices" target="_blank">https://privacy.google.com/businesses/adsservices</a>
+                    <a href="https://privacy.google.com/businesses/adsservices" >https://privacy.google.com/businesses/adsservices</a>
                     (Arten der Verarbeitung sowie der verarbeiteten Daten).</li>
             </ul>
             <h2 id="m136">Präsenzen in sozialen Netzwerken (Social Media)</h2>
@@ -704,7 +704,7 @@ export default function Privacy() {
                 auf die Daten der Nutzer und können direkt entsprechende Maßnahmen ergreifen und
                 Auskünfte geben. Sollten Sie dennoch Hilfe benötigen, dann können Sie sich an
                 uns wenden.</p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>Verarbeitete Datenarten:</strong>
                     Kontaktdaten (z.B. E-Mail, Telefonnummern); Inhaltsdaten (z.B. Eingaben in
@@ -725,7 +725,7 @@ export default function Privacy() {
             <p>
                 <strong>Weitere Hinweise zu Verarbeitungsprozessen, Verfahren und Diensten:</strong>
             </p>
-            <ul class="m-elements">
+            <ul className='m-elements'>
                 <li>
                     <strong>LinkedIn:
                     </strong>Soziales Netzwerk;
@@ -734,24 +734,24 @@ export default function Privacy() {
                     <strong>Rechtsgrundlagen:</strong>
                     Berechtigte Interessen (Art. 6 Abs. 1 S. 1 lit. f) DSGVO);
                     <strong>Website:</strong>
-                    <a href="https://www.linkedin.com" target="_blank">https://www.linkedin.com</a>;
+                    <a href="https://www.linkedin.com" >https://www.linkedin.com</a>;
                     <strong>Datenschutzerklärung:</strong>
-                    <a href="https://www.linkedin.com/legal/privacy-policy" target="_blank">https://www.linkedin.com/legal/privacy-policy</a>;
+                    <a href="https://www.linkedin.com/legal/privacy-policy" >https://www.linkedin.com/legal/privacy-policy</a>;
                     <strong>Auftragsverarbeitungsvertrag:</strong>
-                    <a href="https://legal.linkedin.com/dpa" target="_blank">https://legal.linkedin.com/dpa</a>;
+                    <a href="https://legal.linkedin.com/dpa" >https://legal.linkedin.com/dpa</a>;
                     <strong>Standardvertragsklauseln (Gewährleistung Datenschutzniveau bei
                         Verarbeitung in Drittländern):</strong>
-                    <a href="https://legal.linkedin.com/dpa" target="_blank">https://legal.linkedin.com/dpa</a>;
+                    <a href="https://legal.linkedin.com/dpa" >https://legal.linkedin.com/dpa</a>;
                     <strong>Widerspruchsmöglichkeit (Opt-Out):</strong>
                     <a
                         href="https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out"
-                        target="_blank">https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out</a>.</li>
+                        >https://www.linkedin.com/psettings/guest-controls/retargeting-opt-out</a>.</li>
             </ul>
-            <p class="seal">
+            <p className='m-elements'>
                 <a
                     href="https://datenschutz-generator.de/"
                     title="Rechtstext von Dr. Schwenke - für weitere Informationen bitte anklicken."
-                    target="_blank"
+                    
                     rel="noopener noreferrer nofollow">
                     <img
                         src="https://datenschutz-generator.de/wp-content/plugins/ts-dsg/images/dsg-seal/dsg-seal-pp-de.png"
