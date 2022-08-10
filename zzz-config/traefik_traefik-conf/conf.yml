@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /etc/certs/combinedCert.cer
+      keyFile: /etc/certs/*.webapp-store.de_private_key.key
