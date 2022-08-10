@@ -7,8 +7,6 @@ services:
     volumes:
       - scandirectory:/data
       - protected_media:/protected_media
-    ports:
-      - :80
     depends_on:
       - backend
       - frontend

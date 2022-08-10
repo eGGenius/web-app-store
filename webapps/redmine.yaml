@@ -5,8 +5,6 @@ services:
   redmine:
     image: redmine
     restart: always
-    ports:
-      - :3000
     environment:
       REDMINE_DB_MYSQL: db
       REDMINE_DB_PASSWORD: $webappname$64816kgdjn

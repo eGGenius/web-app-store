@@ -24,8 +24,6 @@ services:
       DB_PASS: wikijsrocks
       DB_NAME: wiki
     restart: unless-stopped
-    ports:
-      - :3000
     deploy:
       labels:
         traefik.constraint-label: traefik-public

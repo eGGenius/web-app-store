@@ -55,9 +55,6 @@ services:
 
     volumes:
       - "app:/hedgedoc/public/uploads"
-    ports:
-      # Passen Sie hier den Port an, wenn Sie ihn im Parameter "CMD_PORT" geändert haben
-      - ":80"
     deploy: 
       labels: 
         traefik.constraint-label: traefik-public

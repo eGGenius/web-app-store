@@ -4,8 +4,6 @@ services:
   filebrowser:
     image: hurlenko/filebrowser
     user: "${UID}:${GID}"
-    ports:
-      - :8080
     volumes:
       - data:/data
       - config:/config

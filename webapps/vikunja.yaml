@@ -16,8 +16,6 @@ services:
     depends_on:
       - db
     restart: unless-stopped
-    ports:
-      - :3456
     deploy:
       labels:
         traefik.enable: 'true'
@@ -32,8 +30,6 @@ services:
   frontend:
     image: vikunja/frontend
     restart: unless-stopped
-    ports:
-      - :80
     deploy:
       labels:
         traefik.constraint-label: traefik-public

@@ -20,8 +20,6 @@ services:
   app:
     image: nextcloud
     restart: always
-    ports:
-      - :80
     links:
       - db
     volumes:

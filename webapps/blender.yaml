@@ -10,8 +10,6 @@ services:
       - TZ=Europe/London
     volumes:
       - blender_data:/config
-    ports:
-      - :3000
     restart: unless-stopped
     deploy:
       labels:
