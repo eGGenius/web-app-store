@@ -33,13 +33,13 @@ function MyApp({ Component, pageProps }) {
       <MenuBar />
       <Component {...pageProps} />
       <ScrollTop threshold={200} behavior="smooth" />
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-CL1EKG60G4" strategy="afterInteractive"/>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=UA-212764482-1" strategy="afterInteractive"/>
       <Script id="google-analytics" strategy="afterInteractive">
         {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-CL1EKG60G4');
+        gtag('config', 'UA-212764482-1');
         `}
       </Script>
     </UserContext.Provider>
