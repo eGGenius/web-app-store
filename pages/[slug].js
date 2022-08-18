@@ -36,13 +36,18 @@ export default function StoreDetailViewPage(props) {
             headers: { "xapikey": portainerApiKey, "username": username, "name": name },
             body: JSON.stringify(content)
         })
+        const jsonRes = await res.json()
         if (res.status == 406) {
-            toast.current.show({severity: 'error', summary: 'Maximum of WebApps reached', detail: 'Delete a WebApp to install another one'});
+            toast.current.show({severity: 'error', summary: jsonRes.summary , detail: jsonRes.detail});
             setLoading(false);
         }
-        else {
+        else if (res.status == 200) {
             setLoading(false);
             router.push('/myapps');
+        }
+        else {
+            toast.current.show({severity: 'error', summary: 'Unexpected Error', detail: 'Try again later'});
+            setLoading(false);
         }
     }
 

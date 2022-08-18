@@ -1,0 +1,127 @@
+version: "3.8"
+
+services:
+  immich-server:
+    image: altran1502/immich-server:release
+    entrypoint: ["/bin/sh", "./start-server.sh"]
+    volumes:
+      - uploads:/usr/src/app/upload
+    environment:
+      - NODE_ENV=production
+      - DB_HOSTNAME=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wr$webappname$553gw
+      - DB_DATABASE_NAME=immich
+      - JWT_SECRET=weqr$webappname$55fe3gw
+      - ENABLE_MAPBOX=false
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  immich-microservices:
+    image: altran1502/immich-server:release
+    entrypoint: ["/bin/sh", "./start-microservices.sh"]
+    volumes:
+      - uploads:/usr/src/app/upload
+    environment:
+      - NODE_ENV=production
+      - DB_HOSTNAME=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wr$webappname$553gw
+      - DB_DATABASE_NAME=immich
+      - JWT_SECRET=weqr$webappname$55fe3gw
+      - ENABLE_MAPBOX=false
+    depends_on:
+      - redis
+      - database
+    restart: always
+
+  immich-machine-learning:
+    image: altran1502/immich-machine-learning:release
+    entrypoint: ["/bin/sh", "./entrypoint.sh"]
+    volumes:
+      - uploads:/usr/src/app/upload
+    environment:
+      - NODE_ENV=production
+      - DB_HOSTNAME=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wr$webappname$553gw
+      - DB_DATABASE_NAME=immich
+      - JWT_SECRET=weqr$webappname$55fe3gw
+      - ENABLE_MAPBOX=false
+    depends_on:
+      - database
+    restart: always
+
+  immich-web:
+    image: altran1502/immich-web:release
+    entrypoint: ["/bin/sh", "./entrypoint.sh"]
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - DB_HOSTNAME=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wr$webappname$553gw
+      - DB_DATABASE_NAME=immich
+      - JWT_SECRET=weqr$webappname$55fe3gw
+      - ENABLE_MAPBOX=false
+
+  redis:
+    container_name: immich_redis
+    image: redis:6.2
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - DB_HOSTNAME=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=wr$webappname$553gw
+      - DB_DATABASE_NAME=immich
+      - JWT_SECRET=weqr$webappname$55fe3gw
+      - ENABLE_MAPBOX=false
+
+  database:
+    container_name: immich_postgres
+    image: postgres:14
+    environment:
+      POSTGRES_PASSWORD: wr$webappname$553gw
+      POSTGRES_USER: postgres
+      POSTGRES_DB: immich
+      PG_DATA: /var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  immich-proxy:
+    container_name: immich_proxy
+    image: altran1502/immich-proxy:release
+    ports:
+      - :80
+    logging:
+      driver: none
+    depends_on:
+      - immich-server
+    restart: always
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+
+volumes:
+  pgdata:
+  uploads:
+
+networks:
+  default:
+    external:
+      name: traefik-public

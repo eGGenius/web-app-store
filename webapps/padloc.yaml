@@ -1,0 +1,66 @@
+version: "3.7"
+services:
+    server:
+        image: padloc/server
+        build:
+            context: github.com/padloc/padloc.git#main
+            dockerfile: Dockerfile-server
+        environment:
+            PL_DATA_BACKEND: leveldb
+            PL_DATA_LEVELDB_DIR: /data
+            PL_DATA_ATTACHMENTS_BACKEND: fs
+            PL_DATA_ATTACHMENTS_DIR: /attachments
+            PL_SERVER_CLIENT_URL: $webappname$.webapp-store.de
+        ports:
+            - :3000
+        volumes:
+            - attachments:/attachments
+            - data:/data
+        restart: unless-stopped
+        deploy:
+          labels:
+            traefik.constraint-label: traefik-public
+            traefik.docker.network: traefik-public
+            traefik.enable: 'true'
+            traefik.http.routers.$webappname$.entrypoints: https
+            traefik.http.routers.$webappname$-http.entrypoints: http
+            traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$-http.middlewares: https-redirect
+            traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$.service: $webappname$
+            traefik.http.routers.$webappname$.tls: 'true'
+            traefik.http.routers.$webappname$.tls.certresolver: le
+            traefik.http.services.$webappname$.loadbalancer.server.port: 3000
+
+    pwa:
+        image: padloc/pwa
+        build:
+            context: github.com/padloc/padloc.git#main
+            dockerfile: Dockerfile-pwa
+        environment:
+            PL_SERVER_URL: https://$webappname$-pwa.webapp-store.de
+        ports:
+            - :8080
+        restart: on-failure
+        deploy:
+          labels:
+            traefik.constraint-label: traefik-public
+            traefik.docker.network: traefik-public
+            traefik.enable: 'true'
+            traefik.http.routers.$webappname$-pwa.entrypoints: https
+            traefik.http.routers.$webappname$-pwa-http.entrypoints: http
+            traefik.http.routers.$webappname$-pwa.rule: Host(`pwa.$webappname$-pwa.webapp-store.de`)
+            traefik.http.routers.$webappname$-pwa-http.middlewares: https-redirect
+            traefik.http.routers.$webappname$-pwa-http.rule: Host(`$webappname$-pwa.webapp-store.de`)
+            traefik.http.routers.$webappname$-pwa.service: $webappname$-pwa
+            traefik.http.routers.$webappname$-pwa.tls: 'true'
+            traefik.http.routers.$webappname$-pwa.tls.certresolver: le
+            traefik.http.services.$webappname$-pwa.loadbalancer.server.port: 8080
+volumes:
+    data:
+    attachments:
+
+networks:
+  default:
+    external:
+      name: traefik-public

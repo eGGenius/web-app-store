@@ -1,19 +1,29 @@
 export default async function handler(req, res) {
     const apiKey = req.headers.xapikey
-    if (await countStacks(apiKey) >= 3){
+    const currentStacks = await getStacks(apiKey)
+    // check if WebApp Name already exists
+    if (JSON.stringify(currentStacks).search('"Name":"' + req.headers.name + '-' + req.headers.username) > 0){
         res
             .status(406)
-            .json('only 3 WebApps are allowed')
+            .send({ summary: 'WebApp name already exists', detail: 'Try another name of delete the WebApp with this name'})
+        return
+    }
+    // check if User already installed 3 WebApps
+    if (currentStacks.length >= 3){
+        res
+            .status(406).json({ summary: 'Maximum of 3 WebApps reached', detail: 'delete one WebApp to install another one' })
+        return
     }
     else {
         const stack = await createStack(req.headers.name, req.body, apiKey, req.headers.username)
         res
             .status(200)
             .json(stack)
+        return
     }
 }
 
-export async function countStacks(apiKey) {
+export async function getStacks(apiKey) {
     const url = process.env.PORTAINER_API + "stacks";
     const res = await fetch(url, {
         method: 'GET',
@@ -24,7 +34,7 @@ export async function countStacks(apiKey) {
         }
     })
     const stacks = await res.json()
-    return await stacks.length
+    return await stacks
 }
 
 export async function createStack(name, body, apiKey, username) {

@@ -1,0 +1,62 @@
+---
+version: "3"
+services:
+  $webappname$home:
+    image: $webappname$/$webappname$home
+    container_name: $webappname$home
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - conf:/conf
+      - work:/work
+    ports:
+        # DNS
+        - :53
+          # # DHCP server
+          # - 67:67/udp
+          # - 68:68/tcp
+          # - 68:68/udp
+          # # HTTPS/DNS-over-HTTPS
+          # - 443:443/tcp
+          # # DNS-over-TLS
+          # - 853:853/tcp
+          # # DNS-over-QUIC
+          # - 784:784/udp
+          # # DNSCrypt
+          # - 5443:5443/tcp
+          # - 5443:5443/udp
+          # WebUI
+        - :3000/tcp
+    restart: unless-stopped
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 3000
+
+        traefik.http.routers.dns-$webappname$.entrypoints: https
+        traefik.http.routers.dns-$webappname$-http.entrypoints: http
+        traefik.http.routers.dns-$webappname$.rule: Host(`dns-$webappname$.webapp-store.de`)
+        traefik.http.routers.dns-$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.dns-$webappname$-http.rule: Host(`dns-$webappname$.webapp-store.de`)
+        traefik.http.routers.dns-$webappname$.service: dns-$webappname$
+        traefik.http.routers.dns-$webappname$.tls: 'true'
+        traefik.http.routers.dns-$webappname$.tls.certresolver: le
+        traefik.http.services.dns-$webappname$.loadbalancer.server.port: 53
+networks:
+  default:
+    external:
+      name: traefik-public
+volumes:
+  conf: null
+  work: null
