@@ -46,9 +46,9 @@ function MyApp({ Component, pageProps }) {
 
       {consent === true && (
         <>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=UA-212764482-1" strategy="afterInteractive" />
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-DTCFE37KP3" strategy="afterInteractive" />
           <Script id="google-analytics" strategy="afterInteractive">
-            {` window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-212764482-1'); `}
+            {` window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-DTCFE37KP3'); `}
           </Script>
         </>
       )}
