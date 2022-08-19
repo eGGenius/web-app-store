@@ -2,7 +2,9 @@ export default async function handler(req, res) {
     const apiKey = req.headers.xapikey
     const currentStacks = await getStacks(apiKey)
     // check if WebApp Name already exists
-    if (JSON.stringify(currentStacks).search('"Name":"' + req.headers.name + '-' + req.headers.username) > 0){
+    const string = JSON.stringify(currentStacks).toLowerCase();
+    const searchString = ('"Name":"' + req.headers.name + '-' + req.headers.username).toLowerCase()
+    if (string.search(searchString) > 0){
         res
             .status(406)
             .send({ summary: 'WebApp name already exists', detail: 'Try another name of delete the WebApp with this name'})
