@@ -6,6 +6,8 @@ services:
     image: percona/percona-server:5.7
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - default
     environment:
       - MYSQL_ROOT_PASSWORD=$webappname$
     command:
@@ -26,6 +28,9 @@ services:
       - MAUTIC_DB_PASSWORD=$webappname$
       - MAUTIC_DB_NAME=mautic
       - MAUTIC_RUN_CRON_JOBS=true
+    networks:
+      - traefik-public
+      - default
     deploy:
       labels:
         traefik.constraint-label: traefik-public
@@ -47,6 +52,6 @@ volumes:
   mautic_data:
     driver: local
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true
+

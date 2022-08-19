@@ -16,6 +16,9 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    networks:
+      - traefik-public
+      - default
     deploy:
       labels:
         traefik.enable: 'true'
@@ -28,6 +31,9 @@ services:
         traefik.docker.network: traefik-public
         traefik.http.routers.$webappname$-api.tls: 'true'
   frontend:
+    networks:
+      - traefik-public
+      - default
     image: vikunja/frontend
     restart: unless-stopped
     deploy:
@@ -45,6 +51,8 @@ services:
         traefik.http.routers.$webappname$.tls.certresolver: le
         traefik.http.services.$webappname$.loadbalancer.server.port: 80
   db:
+    networks:
+      - default
     image: mariadb:10
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
@@ -58,7 +66,7 @@ services:
 volumes:
   files: null
   db: null
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

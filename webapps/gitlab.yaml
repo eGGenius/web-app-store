@@ -2,6 +2,9 @@ version: "3.6"
 services:
   gitlab:
     image: gitlab/gitlab-ee:latest
+    networks:
+      - traefik-public
+      - default
     volumes:
       - data:/var/opt/gitlab
       - logs:/var/log/gitlab
@@ -23,6 +26,8 @@ services:
         traefik.http.services.$webappname$.loadbalancer.server.port: 80
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
+    networks:
+      - default
     deploy:
       mode: replicated
       replicas: 4
@@ -34,4 +39,6 @@ volumes:
   logs: null
   data: null
 
-
+networks:
+  traefik-public:
+    external: true

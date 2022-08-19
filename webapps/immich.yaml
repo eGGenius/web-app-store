@@ -6,6 +6,8 @@ services:
     entrypoint: ["/bin/sh", "./start-server.sh"]
     volumes:
       - uploads:/usr/src/app/upload
+    networks:
+      - default
     environment:
       - NODE_ENV=production
       - DB_HOSTNAME=database
@@ -24,6 +26,8 @@ services:
     entrypoint: ["/bin/sh", "./start-microservices.sh"]
     volumes:
       - uploads:/usr/src/app/upload
+    networks:
+      - default
     environment:
       - NODE_ENV=production
       - DB_HOSTNAME=database
@@ -42,6 +46,8 @@ services:
     entrypoint: ["/bin/sh", "./entrypoint.sh"]
     volumes:
       - uploads:/usr/src/app/upload
+    networks:
+      - default
     environment:
       - NODE_ENV=production
       - DB_HOSTNAME=database
@@ -57,6 +63,8 @@ services:
   immich-web:
     image: altran1502/immich-web:release
     entrypoint: ["/bin/sh", "./entrypoint.sh"]
+    networks:
+      - default
     restart: always
     environment:
       - NODE_ENV=production
@@ -82,6 +90,8 @@ services:
 
   database:
     container_name: immich_postgres
+    networks:
+      - default
     image: postgres:14
     environment:
       POSTGRES_PASSWORD: wr$webappname$553gw
@@ -94,6 +104,9 @@ services:
 
   immich-proxy:
     container_name: immich_proxy
+    networks:
+      - traefik-public
+      - default
     image: altran1502/immich-proxy:release
     ports:
       - :80
@@ -122,6 +135,5 @@ volumes:
   uploads:
 
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

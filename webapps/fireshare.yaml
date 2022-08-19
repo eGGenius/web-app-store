@@ -3,8 +3,8 @@ services:
   fireshare:
     container_name: fireshare
     image: shaneisrael/fireshare:latest
-    ports:
-      - :80
+    networks:
+      - traefik-public
     volumes:
       - fireshare_data:/data
       - fireshare_processed:/processed
@@ -35,7 +35,7 @@ volumes:
   fireshare_data: null
   fireshare_processed: null
   fireshare_videos: null
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

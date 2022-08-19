@@ -4,6 +4,9 @@ services:
   rocketchat:
     image: registry.rocket.chat/rocketchat/rocket.chat:4.8.1
     restart: unless-stopped
+    networks:
+      - traefik-public
+      - default
     volumes:
      - uploads:/app/uploads
     environment:
@@ -47,8 +50,6 @@ volumes:
   uploads:
   db:
 
-
 networks:
-  default:
-    external:    
-      name: traefik-public
+  traefik-public:
+    external: true

@@ -5,6 +5,8 @@ services:
         volumes:
             - db:/var/lib/postgresql/data
         restart: unless-stopped
+        networks:
+          - default
         environment:
             - POSTGRES_PASSWORD=$webappname$5wzH53IRBSr
             - POSTGRES_USER=joplin
@@ -14,6 +16,9 @@ services:
         depends_on:
             - db
         restart: unless-stopped
+        networks:
+          - traefik-public
+          - default
         environment:
             - APP_PORT=22300
             - APP_BASE_URL=https://$webappname$.webapp-store.de
@@ -42,6 +47,5 @@ volumes:
   db: null
 
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

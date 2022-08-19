@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: wikijs
     logging:
       driver: "none"
+    networks:
+      - default
     restart: unless-stopped
     volumes:
       - db-data:/var/lib/postgresql/data
@@ -24,6 +26,9 @@ services:
       DB_PASS: wikijsrocks
       DB_NAME: wiki
     restart: unless-stopped
+    networks:
+      - traefik-public
+      - default
     deploy:
       labels:
         traefik.constraint-label: traefik-public
@@ -41,7 +46,7 @@ services:
 
 volumes:
   db-data:
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

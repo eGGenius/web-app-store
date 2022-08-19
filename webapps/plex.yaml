@@ -11,6 +11,8 @@ services:
       - plex_tv:/tv
       - plex_movies:/movies
     restart: unless-stopped
+    networks:
+      - traefik-public
     deploy:
       labels:
         traefik.constraint-label: traefik-public
@@ -29,7 +31,7 @@ volumes:
   plex_config: null
   plex_tv: null
   plex_movies: null
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

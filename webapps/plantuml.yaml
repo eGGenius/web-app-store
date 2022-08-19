@@ -5,6 +5,8 @@ services:
     image: plantuml/plantuml-server:jetty
     environment:
       - BASE_URL=$webappname$.webapp-store.de
+    networks:
+      - traefik-public
     deploy:
       labels:
         traefik.constraint-label: traefik-public
@@ -19,7 +21,7 @@ services:
         traefik.http.routers.$webappname$.tls: 'true'
         traefik.http.routers.$webappname$.tls.certresolver: le
         traefik.http.services.$webappname$.loadbalancer.server.port: 8080
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

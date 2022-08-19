@@ -2,6 +2,8 @@ version: '3'
 services:
   database:
     image: postgres:13.4-alpine
+    networks:
+      - default
     environment:
       # Ersetzen Sie Benutzername und Kennwort durch individuelle Zugangsdaten. Sie sind nur für die Datenbank, nicht das Webinterface.
       - POSTGRES_USER=$webappname$
@@ -12,6 +14,9 @@ services:
   app:
     # Prüfen Sie unter https://hedgedoc.org/latest-release welche Version aktuell ist und ersetzen Sie ggf. die Versionsnummer
     image: quay.io/hedgedoc/hedgedoc:1.9.3
+    networks:
+      - traefik-public
+      - default
     environment:
       # Grundeinstellungen
       ## Zeitzone
@@ -76,8 +81,6 @@ volumes:
   dbdata:
   app:
 
-
 networks:
-  default:
-    external:    
-      name: traefik-public
+  traefik-public:
+    external: true

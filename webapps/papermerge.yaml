@@ -10,7 +10,8 @@ services:
       - PGID=1000
       - TZ=Europe/London
     restart: unless-stopped
-
+    networks:
+      - traefik-public
     deploy:
       labels:
         traefik.constraint-label: traefik-public
@@ -28,7 +29,7 @@ services:
 volumes:
   papermerge_config: null
   papermerge_data: null
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

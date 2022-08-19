@@ -17,6 +17,9 @@ services:
             - attachments:/attachments
             - data:/data
         restart: unless-stopped
+        networks:
+        - traefik-public
+        - default
         deploy:
           labels:
             traefik.constraint-label: traefik-public
@@ -42,6 +45,9 @@ services:
         ports:
             - :8080
         restart: on-failure
+        networks:
+        - traefik-public
+        - default
         deploy:
           labels:
             traefik.constraint-label: traefik-public
@@ -61,6 +67,5 @@ volumes:
     attachments:
 
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true

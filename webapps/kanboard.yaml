@@ -1,6 +1,8 @@
 version: '3'
 services:
   kanboard:
+    networks:
+      - traefik-public
     image: 'kanboard/kanboard:latest'
     volumes:
       - 'kanboard_data:/var/www/app/data'
@@ -24,7 +26,7 @@ volumes:
   kanboard_data: null
   kanboard_plugins: null
   kanboard_ssl: null
+
 networks:
-  default:
-    external:
-      name: traefik-public
+  traefik-public:
+    external: true
