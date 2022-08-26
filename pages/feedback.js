@@ -1,6 +1,4 @@
 import { Card } from "primereact/card"
-import { UserContext } from '../lib/context';
-import { useContext } from 'react';
 
 export default function FeedbackPage({ }) {
     return (
@@ -8,7 +6,7 @@ export default function FeedbackPage({ }) {
         <div className="p-4">
             <Card>
                 <iframe 
-                    src="/feedback.html" 
+                    src="./feedbackForm.html" 
                     width="100%"
                     allow="geolocation"
                     frameBorder="0"
