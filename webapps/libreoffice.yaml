@@ -1,18 +1,15 @@
 version: "3"
 services:
-  wikijs:
-    image: lscr.io/linuxserver/wikijs:latest
-    container_name: wikijs
+  libreoffice:
+    image: lscr.io/linuxserver/libreoffice:latest
+    container_name: libreoffice
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/London
     volumes:
       - config:/config
-      - data:/data
-    restart: unless-stopped
     networks:
-      - default
       - traefik-public
     deploy:
       labels:
@@ -28,11 +25,8 @@ services:
         traefik.http.routers.$webappname$.tls: 'true'
         traefik.http.routers.$webappname$.tls.certresolver: le
         traefik.http.services.$webappname$.loadbalancer.server.port: 3000
-
 volumes:
-  config:
-  data:
-
+  config: null
 networks:
   traefik-public:
     external: true

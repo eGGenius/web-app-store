@@ -1,0 +1,66 @@
+version: '3.9'
+services:
+  onlyoffice-documentserver:
+    depends_on:
+      - onlyoffice-postgresql
+      - onlyoffice-rabbitmq
+    environment:
+      - DB_TYPE=postgres
+      - DB_HOST=onlyoffice-postgresql
+      - DB_PORT=5432
+      - DB_NAME=onlyoffice
+      - DB_USER=onlyoffice
+      - AMQP_URI=amqp://guest:guest@onlyoffice-rabbitmq
+    volumes:
+       - data:/var/www/onlyoffice/Data
+       - log:/var/log/onlyoffice
+       - cache:/var/lib/onlyoffice/documentserver/App_Data/cache/files
+       - files:/var/www/onlyoffice/documentserver-example/public/files
+       - fonts:/usr/share/fonts
+    stop_grace_period: 60s
+    stdin_open: true
+    networks:
+      - default
+      - traefik-public
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+       
+  onlyoffice-rabbitmq:
+    image: rabbitmq
+    networks:
+      - default
+
+  onlyoffice-postgresql:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_DB=onlyoffice
+      - POSTGRES_USER=onlyoffice
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - postgresql_data:/var/lib/postgresql
+    networks:
+      - default
+
+volumes:
+  postgresql_data: null
+  data: null
+  log: null
+  cache: null
+  files: null
+  fonts: null
+
+networks:
+  traefik-public:
+    external: true
