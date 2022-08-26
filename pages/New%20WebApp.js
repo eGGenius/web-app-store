@@ -6,7 +6,7 @@ import SignInOutButton from '../components/SignInOutButton';
 
 import CreateAppForm from "../components/CreateAppForm"
 
-export default function NewAppPage({ }) {
+export default function NewWebAppPage({ }) {
     const { user } = useContext(UserContext);
     return (
         

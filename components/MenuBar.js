@@ -21,11 +21,6 @@ export default function MenuBar() {
             command:()=>{ router.push('/myapps'); }
         },
         {
-            label: 'New',
-            icon: 'pi pi-fw pi-plus-circle',
-            command:()=>{ router.push('/newapp'); }
-        },
-        {
             label: 'Feedback',
             icon: 'pi pi-fw pi-comment',
             command:()=>{ router.push('/feedback'); }
