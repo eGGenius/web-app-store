@@ -1,0 +1,65 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=lemmy
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=lemmy
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - default
+
+  lemmy:
+    image: dessalines/lemmy:0.16.4
+    environment:
+      - RUST_LOG="warn,lemmy_server=info,lemmy_api=info,lemmy_api_common=info,lemmy_api_crud=info,lemmy_apub=info,lemmy_db_schema=info,lemmy_db_views=info,lemmy_db_views_actor=info,lemmy_db_views_moderator=info,lemmy_routes=info,lemmy_utils=info,lemmy_websocket=info"
+    volumes:
+      - config:/config
+    depends_on:
+      - postgres
+      - pictrs
+    networks:
+      - default
+  pictrs:
+    image: asonix/pictrs:0.3.1
+    user: 991:991
+    volumes:
+      - pictrs:/mnt
+    networks:
+      - default
+
+  lemmy-ui:
+    image: dessalines/lemmy-ui:0.16.5
+    environment:
+      - LEMMY_INTERNAL_HOST=lemmy:8536
+      - LEMMY_EXTERNAL_HOST=localhost:8536
+      - LEMMY_HTTPS=true
+    depends_on: 
+      - lemmy
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.lemmy.entrypoints: https
+        traefik.http.routers.lemmy-http.entrypoints: http
+        traefik.http.routers.lemmy.rule: Host(`lemmy.webapp-store.de`)
+        traefik.http.routers.lemmy-http.middlewares: https-redirect
+        traefik.http.routers.lemmy-http.rule: Host(`lemmy.webapp-store.de`)
+        traefik.http.routers.lemmy.service: lemmy
+        traefik.http.routers.lemmy.tls: 'true'
+        traefik.http.routers.lemmy.tls.certresolver: le
+        traefik.http.services.lemmy.loadbalancer.server.port: 1234
+volumes:
+  postgres: null
+  config: null
+  pictrs: null
+
+networks:
+  traefik-public:
+    external: true

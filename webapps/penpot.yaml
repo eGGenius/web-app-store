@@ -1,0 +1,73 @@
+version: "3.5"
+services:
+  penpot-frontend:
+    image: "penpotapp/frontend:latest"
+    volumes:
+      - penpot_assets_data:/opt/data
+    depends_on:
+      - penpot-backend
+      - penpot-exporter
+    networks:
+      - traefik-public
+      - default
+    deploy:
+      labels:
+        traefik.constraint-label: traefik-public
+        traefik.docker.network: traefik-public
+        traefik.enable: 'true'
+        traefik.http.routers.$webappname$.entrypoints: https
+        traefik.http.routers.$webappname$-http.entrypoints: http
+        traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$-http.middlewares: https-redirect
+        traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+        traefik.http.routers.$webappname$.service: $webappname$
+        traefik.http.routers.$webappname$.tls: 'true'
+        traefik.http.routers.$webappname$.tls.certresolver: le
+        traefik.http.services.$webappname$.loadbalancer.server.port: 80
+
+  penpot-backend:
+    image: "penpotapp/backend:latest"
+    volumes:
+      - penpot_assets_data:/opt/data
+    depends_on:
+      - penpot-postgres
+      - penpot-redis
+    networks:
+      - default
+
+  penpot-exporter:
+    image: "penpotapp/exporter:latest"
+    environment:
+      # Don't touch it; this uses internal docker network to
+      # communicate with the frontend.
+      - PENPOT_PUBLIC_URI=http://penpot-frontend
+    networks:
+      - default
+
+  penpot-postgres:
+    image: "postgres:13"
+    restart: always
+    stop_signal: SIGINT
+    environment:
+      - POSTGRES_INITDB_ARGS=--data-checksums
+      - POSTGRES_DB=penpot
+      - POSTGRES_USER=penpot
+      - POSTGRES_PASSWORD=penpot
+    volumes:
+      - penpot_postgres_data:/var/lib/postgresql/data
+    networks:
+      - default
+
+  penpot-redis:
+    image: redis:6
+    restart: always
+    networks:
+      - default
+
+volumes:
+  penpot_postgres_data:
+  penpot_assets_data:
+
+networks:
+  traefik-public:
+    external: true

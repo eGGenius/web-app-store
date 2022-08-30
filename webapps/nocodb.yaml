@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+    nocodb-db:
+        image: postgres:12.1-alpine
+        networks:
+            - default
+        environment:
+           POSTGRES_USER: nocodb
+           POSTGRES_PASSWORD: HTetiajo53e42riwljgglirwd
+           POSTGRES_DB: nocodb
+        volumes:
+          - nocodb-db:/var/lib/postgresql/data
+        healthcheck:
+          test: pg_isready -U nocodb -d nocodb
+          interval: 10s
+          timeout: 2s
+          retries: 10
+    nocodb:
+        image: nocodb/nocodb:latest
+        restart: always
+        volumes:
+          - nocodb-data:/usr/app/data
+        networks:
+          - default
+          - traefik-public
+        environment:
+          - NC_DB=pg://nocodb-db:5432?u=nocodb&p=HTetiajo53e42riwljgglirwd&d=nocodb
+          - NC_PUBLIC_URL=https://$webappname$.webapp-store.de
+          - NC_DISABLE_TELE=true
+        deploy:
+          restart_policy:
+            delay: 5s
+          labels:
+            traefik.constraint-label: traefik-public
+            traefik.docker.network: traefik-public
+            traefik.enable: 'true'
+            traefik.http.routers.$webappname$.entrypoints: https
+            traefik.http.routers.$webappname$-http.entrypoints: http
+            traefik.http.routers.$webappname$.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$-http.middlewares: https-redirect
+            traefik.http.routers.$webappname$-http.rule: Host(`$webappname$.webapp-store.de`)
+            traefik.http.routers.$webappname$.service: $webappname$
+            traefik.http.routers.$webappname$.tls: 'true'
+            traefik.http.routers.$webappname$.tls.certresolver: le
+            traefik.http.services.$webappname$.loadbalancer.server.port: 8080
+        depends_on:
+          - nocodb-db
+volumes:
+  nocodb-db:
+  nocodb-data:
+networks:
+  traefik-public:
+    external: true
