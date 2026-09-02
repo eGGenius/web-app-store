@@ -4,6 +4,7 @@ import CookieConsent from "react-cookie-consent";
 import Head from 'next/head';
 import Script from 'next/script'
 import { getCookie } from 'cookies-next';
+import { Analytics } from '@vercel/analytics/react';
 
 import { UserContext } from '../lib/context';
 import { useUserData } from '../lib/hooks';
@@ -53,6 +54,7 @@ function MyApp({ Component, pageProps }) {
         </>
       )}
 
+      <Analytics />
     </UserContext.Provider>
   );
 }
